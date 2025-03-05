@@ -1,0 +1,19 @@
+<svg 
+    width="64" 
+    height="64" 
+    viewBox="0 0 64 64" 
+    fill="none" 
+    xmlns="http://www.w3.org/2000/svg">
+    
+    <!-- Hockey Sticks -->
+    <path d="M16 50 L26 30 L30 32 L20 52 Z" fill="#D89C5B"/>
+    <path d="M48 50 L38 30 L34 32 L44 52 Z" fill="#D89C5B"/>
+    
+    <!-- Stick Shafts -->
+    <path d="M28 32 L12 60" stroke="#333" stroke-width="4" stroke-linecap="round"/>
+    <path d="M36 32 L52 60" stroke="#333" stroke-width="4" stroke-linecap="round"/>
+
+    <!-- Hockey Puck -->
+    <ellipse cx="32" cy="52" rx="8" ry="4" fill="#444"/>
+
+</svg>
