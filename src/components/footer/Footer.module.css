@@ -1,7 +1,7 @@
 .footer {
-    background-color: #1f2937;
-    color: #f3f4f6;
-    padding: 3rem 1rem;
+    background-color: #18181b;
+    color: #a1a1aa;
+    padding: 2rem 1rem;
     width: 100%;
 }
 
@@ -9,76 +9,73 @@
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: center;
     gap: 2rem;
-    flex-wrap: wrap;
 }
 
-.footerSection {
-    flex: 1;
-    min-width: 250px;
-}
-
-.footerSection h4 {
-    color: #fff;
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-}
-
-.footerSection nav {
+.footerLinks nav {
     display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    gap: 2rem;
 }
 
-.footerSection nav a {
-    color: #d1d5db;
+.footerLinks nav a {
+    color: #a1a1aa;
     text-decoration: none;
     transition: color 0.2s ease;
+    font-size: 0.95rem;
 }
 
-.footerSection nav a:hover {
+.footerLinks nav a:hover {
     color: #fff;
 }
 
 .socialLinks {
+    text-align: center;
+}
+
+.socialLinks h4 {
+    color: #fff;
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+}
+
+.socialLinks div {
     display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    gap: 1.5rem;
 }
 
 .socialLinks a {
-    color: #d1d5db;
+    color: #a1a1aa;
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: all 0.2s ease;
+    font-size: 1.25rem;
 }
 
 .socialLinks a:hover {
     color: #fff;
+    transform: translateY(-2px);
 }
 
 .footerBottom {
     max-width: 1200px;
-    margin: 2rem auto 0;
-    padding-top: 2rem;
-    border-top: 1px solid #374151;
+    margin: 1.5rem auto 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid #27272a;
     text-align: center;
-    color: #9ca3af;
+    color: #71717a;
     font-size: 0.875rem;
 }
 
 /* Responsive design */
-@media (max-width: 768px) {
+@media (max-width: 640px) {
     .footerContent {
         flex-direction: column;
-        text-align: center;
+        gap: 2rem;
     }
 
-    .footerSection {
-        margin-bottom: 2rem;
-    }
-
-    .socialLinks {
-        align-items: center;
+    .footerLinks nav {
+        gap: 1.5rem;
     }
 }

@@ -1,13 +1,11 @@
-import { Team } from '@/types';
+import { Team } from '@/types/players';
 
 export class APIService {
   private static instance: APIService;
-  private baseUrl: string;
   private headers: HeadersInit;
 
 
   private constructor() {
-    this.baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
     this.headers = {
       'Content-Type': 'application/json',
     };
@@ -21,7 +19,7 @@ export class APIService {
   }
 
   async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
-    const response = await fetch(`${this.baseUrl}${endpoint}`, {
+    const response = await fetch(`${endpoint}`, {
       ...options,
       headers: {
         ...this.headers,

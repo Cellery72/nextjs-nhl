@@ -4,27 +4,23 @@ import styles from "./Navbar.module.css";
 const Navbar: React.FC = () => {
     return (
         <header className={styles.header}>
-            <nav>
-                <ul className={styles.navList}>
-                    <li className={styles.navItem}>
-                        <Link href="/">
-                            Home
-                        </Link>
-                    </li>
-                    <li className={styles.navItem}>
-                        <Link href="/teams">
-                            Teams
-                        </Link>
-                    </li>
-                    <li className={styles.navItem}>
-                        <Link href="/players">
-                            Players
-                        </Link>
-                    </li>
-                </ul>
-            </nav>
+            <div className={styles.navContainer}>
+                <nav>
+                    <ul className={styles.navList}>
+                        <li>
+                            <Link href="/">Home</Link>
+                        </li>
+                        <li>
+                            <Link href="/teams">NHL Teams</Link>
+                        </li>
+                        <li>
+                            <Link href="/schedule">Current NHL Schedule</Link>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </header>
-    )
-}
+    );
+};
 
 export default Navbar;
