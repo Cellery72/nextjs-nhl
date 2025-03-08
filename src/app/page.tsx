@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function Home() {
   return (
@@ -24,19 +25,19 @@ export default async function Home() {
         </div>
 
         <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
-          <a
+          <Link
             className="btn-primary flex items-center justify-center gap-3 min-w-[180px]"
             href="/teams"
           >
             🏒 Explore Teams 
-          </a>
+          </Link>
 
-          <a
-            className="btn-secondary flex items-center justify-center min-w-[180px]"
+          <Link
+            className="btn-secondPary flex items-center justify-center min-w-[180px]"
             href="/schedule"
           >
             View Current Schedule 📅
-          </a>
+          </Link>
         </div>
 
         <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">

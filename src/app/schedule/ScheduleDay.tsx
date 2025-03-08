@@ -1,7 +1,7 @@
 'use client';
 import GameComponent from '@/components/game/Game';
 import { NHLGame } from '@/types/schedule';
-import { Standings, StandingsTeam } from '@/types/standings';
+import { Standings } from '@/types/standings';
 import { useState, useEffect } from 'react';
 
 interface ScheduleDayProps {

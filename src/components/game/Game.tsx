@@ -1,7 +1,7 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { NHLGame } from '@/types/schedule';
-import { Standings, StandingsTeam } from '@/types/standings';
+import { StandingsTeam } from '@/types/standings';
 import Image from 'next/image';
 import Link from 'next/link';
 
