@@ -1,49 +1,58 @@
 import Image from "next/image";
 
 export default async function Home() {
-
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+    <div className="min-h-screen bg-gray-50">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="text-center max-w-2xl mx-auto">
+          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">Next.js + NHL 🏒</h1>
+          <p className="text-lg text-gray-600 mt-4">
+            Built as an introduction project to Next.js.
+          </p>
+        </div>
 
-        <h1>Welcome</h1>
-        <Image
-          className="dark:invert"
-          src="/JE-Logo.png"
-          alt="Justin Ellery logo"
-          width={150}
-          height={150}
-          priority
-          style={{
-            display: 'block',
-            margin: '0 auto'
-        }}
-        />
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="/teams"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+        <div className="mt-12 flex justify-center">
+          <div className="bg-white rounded-full p-4 shadow-sm border-2 border-gray-900">
             <Image
-              className="dark:invert"
-              src="/teams.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              src="/nhl.png"
+              alt="NHL Logo"
+              width={180}
+              height={180}
+              priority
             />
-            Explore Teams
+          </div>
+        </div>
+
+        <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            className="btn-primary flex items-center justify-center gap-3 min-w-[180px]"
+            href="/teams"
+          >
+            🏒 Explore Teams 
           </a>
 
           <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
+            className="btn-secondary flex items-center justify-center min-w-[180px]"
             href="/schedule"
-            rel="noopener noreferrer"
           >
-            View Current Schedule
+            View Current Schedule 📅
           </a>
+        </div>
+
+        <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="bg-white rounded-lg shadow-sm p-6">
+            <h2 className="text-gray-900">Track Your Teams</h2>
+            <p className="mt-2 text-gray-600">
+              Follow your favorite NHL teams and never miss a game. Get easy access to schedules and team information.
+            </p>
+          </div>
+          
+          <div className="bg-white rounded-lg shadow-sm p-6">
+            <h2 className="text-gray-900">Live Schedule</h2>
+            <p className="mt-2 text-gray-600">
+              View upcoming games and game results in real-time. Never miss a moment of the action!
+            </p>
+          </div>
         </div>
       </main>
     </div>

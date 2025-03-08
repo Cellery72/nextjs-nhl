@@ -1,0 +1,28 @@
+.container {
+    min-height: 100vh;
+    background-color: #f8f9fa;
+    padding: 2rem;
+}
+
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.teamName {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #1a1a1a;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.logoContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+} 

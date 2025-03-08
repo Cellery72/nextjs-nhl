@@ -6,7 +6,7 @@ export interface NHLTeamName {
 export const NHL_TEAMS: NHLTeamName[] = [
   { abbrv: "ANA", name: "Anaheim Ducks" },
   { abbrv: "ARI", name: "Arizona Coyotes" },
-  { abbrv: "BOS", name: "Boston Bruines" },
+  { abbrv: "BOS", name: "Boston Bruins" },
   { abbrv: "BUF", name: "Buffalo Sabres" },
   { abbrv: "CGY", name: "Calgary Flames" },
   { abbrv: "CAR", name: "Carolina Hurricanes" },
@@ -32,7 +32,7 @@ export const NHL_TEAMS: NHLTeamName[] = [
   { abbrv: "TBL", name: "Tampa Bay Lightning" },
   { abbrv: "TOR", name: "Toronto Maple Leafs" },
   { abbrv: "VAN", name: "Vancouver Canucks" },
-  { abbrv: "VEG", name: "Vegas Golden Knights" },
+  { abbrv: "VGK", name: "Vegas Golden Knights" },
   { abbrv: "WSH", name: "Washington Capitals" },
   { abbrv: "WPG", name: "Winnipeg Jets" }
 ];

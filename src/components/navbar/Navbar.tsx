@@ -11,10 +11,10 @@ const Navbar: React.FC = () => {
                             <Link href="/">Home</Link>
                         </li>
                         <li>
-                            <Link href="/teams">NHL Teams</Link>
+                            <Link href="/teams">NHL Teams 🏒</Link>
                         </li>
                         <li>
-                            <Link href="/schedule">Current NHL Schedule</Link>
+                            <Link href="/schedule">Current NHL Schedule 📅</Link>
                         </li>
                     </ul>
                 </nav>

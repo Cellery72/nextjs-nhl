@@ -21,6 +21,26 @@ body {
 }
 
 h1 {
-  font-size:2.5rem;
-  
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Add consistent card styling */
+.card {
+  @apply bg-white rounded-lg shadow-sm p-6;
+}
+
+/* Add consistent button styling */
+.btn-primary {
+  @apply rounded-lg bg-gray-900 text-white hover:bg-gray-800 transition-colors px-6 py-3 shadow-sm;
+}
+
+.btn-secondary {
+  @apply rounded-lg bg-white border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-colors px-6 py-3 shadow-sm;
 }

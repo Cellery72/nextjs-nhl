@@ -1,104 +1,121 @@
-import { apiService } from './apiService';
+import APIService from './apiService';
 import { NHLSchedule } from '@/types/schedule';
+import { Standings } from '@/types/standings';
 
-const BASE_URL = 'https://api-web.nhle.com';
+export class NHLEService {
+  private static instance: NHLEService;
+  private apiService: APIService;
 
-// Schedule related endpoints
-export const getScheduleNow = async (): Promise<NHLSchedule> => {
-  return await apiService.get<NHLSchedule>(`${BASE_URL}/v1/schedule/now`);
-};
+  private constructor() {
+    this.apiService = new APIService('https://api-web.nhle.com');
+  }
 
-export const getScheduleByDate = async (date: string) => {
-  return await apiService.get(`${BASE_URL}/v1/schedule/${date}`);
-};
+  public static getInstance(): NHLEService {
+    if (!NHLEService.instance) {
+      NHLEService.instance = new NHLEService();
+    }
+    return NHLEService.instance;
+  }
 
-export const getTeamScheduleNow = async (teamCode: string) => {
-  return await apiService.get(`${BASE_URL}/v1/club-schedule/${teamCode}/week/now`);
-};
+  // Schedule related endpoints
+  async getScheduleNow(): Promise<NHLSchedule> {
+    return await this.apiService.get<NHLSchedule>('/v1/schedule/now');
+  }
 
-export const getTeamScheduleByWeek = async (teamCode: string, date: string) => {
-  return await apiService.get(`${BASE_URL}/v1/club-schedule/${teamCode}/week/${date}`);
-};
+  async getScheduleByDate(date: string) {
+    return await this.apiService.get(`/v1/schedule/${date}`);
+  }
 
-export const getTeamScheduleByMonth = async (teamCode: string, month: string) => {
-  return await apiService.get(`${BASE_URL}/v1/club-schedule/${teamCode}/month/${month}`);
-};
+  async getTeamScheduleNow(teamCode: string) {
+    return await this.apiService.get(`/v1/club-schedule/${teamCode}/week/now`);
+  }
 
-// Standings related endpoints
-export const getStandingsNow = async () => {
-  return await apiService.get(`${BASE_URL}/v1/standings/now`);
-};
+  async getTeamScheduleByWeek(teamCode: string, date: string) {
+    return await this.apiService.get(`/v1/club-schedule/${teamCode}/week/${date}`);
+  }
 
-export const getStandingsByDate = async (date: string) => {
-  return await apiService.get(`${BASE_URL}/v1/standings/${date}`);
-};
+  async getTeamScheduleByMonth(teamCode: string, month: string) {
+    return await this.apiService.get(`/v1/club-schedule/${teamCode}/month/${month}`);
+  }
 
-// Score related endpoints
-export const getScoresNow = async () => {
-  return await apiService.get(`${BASE_URL}/v1/score/now`);
-};
+  // Standings related endpoints
+  async getStandingsNow() : Promise<Standings> {
+    return await this.apiService.get(`/v1/standings/now`);
+  }
 
-export const getScoresByDate = async (date: string) => {
-  return await apiService.get(`${BASE_URL}/v1/score/${date}`);
-};
+  async getStandingsByDate(date: string) {
+    return await this.apiService.get(`/v1/standings/${date}`);
+  }
 
-// Team related endpoints
-export const getTeamRoster = async (teamCode: string) => {
-  return await apiService.get(`${BASE_URL}/v1/roster/${teamCode}/current`);
-};
+  // Score related endpoints
+  async getScoresNow() {
+    return await this.apiService.get(`/v1/score/now`);
+  }
 
-export const getTeamStats = async (teamCode: string) => {
-  return await apiService.get(`${BASE_URL}/v1/club-stats/${teamCode}/now`);
-};
+  async getScoresByDate(date: string) {
+    return await this.apiService.get(`/v1/score/${date}`);
+  }
 
-export const getTeamProspects = async (teamCode: string) => {
-  return await apiService.get(`${BASE_URL}/v1/prospects/${teamCode}`);
-};
+  // Team related endpoints
+  async getTeamRoster(teamCode: string) {
+    return await this.apiService.get(`/v1/roster/${teamCode}/current`);
+  }
 
-// Player related endpoints
-export const getPlayerSpotlight = async () => {
-  return await apiService.get(`${BASE_URL}/v1/player-spotlight`);
-};
+  async getTeamStats(teamCode: string) {
+    return await this.apiService.get(`/v1/club-stats/${teamCode}/now`);
+  }
 
-export const getPlayerLanding = async (playerId: number) => {
-  return await apiService.get(`${BASE_URL}/v1/player/${playerId}/landing`);
-};
+  async getTeamProspects(teamCode: string) {
+    return await this.apiService.get(`/v1/prospects/${teamCode}`);
+  }
 
-export const getPlayerGameLog = async (playerId: number) => {
-  return await apiService.get(`${BASE_URL}/v1/player/${playerId}/game-log/now`);
-};
+  // Player related endpoints
+  async getPlayerSpotlight() {
+    return await this.apiService.get(`/v1/player-spotlight`);
+  }
 
-// Game related endpoints
-export const getGameBoxscore = async (gameId: number) => {
-  return await apiService.get(`${BASE_URL}/v1/gamecenter/${gameId}/boxscore`);
-};
+  async getPlayerLanding(playerId: number) {
+    return await this.apiService.get(`/v1/player/${playerId}/landing`);
+  }
 
-export const getGamePlayByPlay = async (gameId: number) => {
-  return await apiService.get(`${BASE_URL}/v1/gamecenter/${gameId}/play-by-play`);
-};
+  async getPlayerGameLog(playerId: number) {
+    return await this.apiService.get(`/v1/player/${playerId}/game-log/now`);
+  }
 
-export const getGameLanding = async (gameId: number) => {
-  return await apiService.get(`${BASE_URL}/v1/gamecenter/${gameId}/landing`);
-};
+  // Game related endpoints
+  async getGameBoxscore(gameId: number) {
+    return await this.apiService.get(`/v1/gamecenter/${gameId}/boxscore`);
+  }
 
-// Stats leaders endpoints
-export const getCurrentSkaterStatsLeaders = async (categories: string, limit: number) => {
-  return await apiService.get(
-    `${BASE_URL}/v1/skater-stats-leaders/current?categories=${categories}&limit=${limit}`
-  );
-};
+  async getGamePlayByPlay(gameId: number) {
+    return await this.apiService.get(`/v1/gamecenter/${gameId}/play-by-play`);
+  }
 
-export const getCurrentGoalieStatsLeaders = async (categories: string, limit: number) => {
-  return await apiService.get(
-    `${BASE_URL}/v1/goalie-stats-leaders/current?categories=${categories}&limit=${limit}`
-  );
-};
+  async getGameLanding(gameId: number) {
+    return await this.apiService.get(`/v1/gamecenter/${gameId}/landing`);
+  }
 
-// Playoff related endpoints
-export const getPlayoffBracket = async (year: number) => {
-  return await apiService.get(`${BASE_URL}/v1/playoff-bracket/${year}`);
-};
+  // Stats leaders endpoints
+  async getCurrentSkaterStatsLeaders(categories: string, limit: number) {
+    return await this.apiService.get(
+      `/v1/skater-stats-leaders/current?categories=${categories}&limit=${limit}`
+    );
+  }
 
-export const getPlayoffSeries = async (season: number, seriesLetter: string) => {
-  return await apiService.get(`${BASE_URL}/v1/schedule/playoff-series/${season}/${seriesLetter}`);
-};
+  async getCurrentGoalieStatsLeaders(categories: string, limit: number) {
+    return await this.apiService.get(
+      `/v1/goalie-stats-leaders/current?categories=${categories}&limit=${limit}`
+    );
+  }
+
+  // Playoff related endpoints
+  async getPlayoffBracket(year: number) {
+    return await this.apiService.get(`/v1/playoff-bracket/${year}`);
+  }
+
+  async getPlayoffSeries(season: number, seriesLetter: string) {
+    return await this.apiService.get(`/v1/schedule/playoff-series/${season}/${seriesLetter}`);
+  }
+}
+
+export const nhleService = NHLEService.getInstance();

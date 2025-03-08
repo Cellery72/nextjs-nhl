@@ -1,25 +1,17 @@
-import { Team } from '@/types/players';
-
 export class APIService {
   private static instance: APIService;
   private headers: HeadersInit;
+  private baseUrl: string;
 
-
-  private constructor() {
+  constructor(baseUrl: string) {
+    this.baseUrl = baseUrl;
     this.headers = {
       'Content-Type': 'application/json',
     };
   }
 
-  static getInstance(): APIService {
-    if (!APIService.instance) {
-      APIService.instance = new APIService();
-    }
-    return APIService.instance;
-  }
-
   async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
-    const response = await fetch(`${endpoint}`, {
+    const response = await fetch(`${this.baseUrl}${endpoint}`, {
       ...options,
       headers: {
         ...this.headers,
@@ -49,9 +41,6 @@ export class APIService {
     return this.request<T>(endpoint, { method: 'DELETE' });
   }
 
-  setAuthToken(token: string) {
-    this.headers = { ...this.headers, 'Authorization': `Bearer ${token}` };
-  }
 }
 
-export const apiService = APIService.getInstance();
+export default APIService;
