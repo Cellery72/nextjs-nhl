@@ -8,8 +8,7 @@ const Footer: React.FC = () => {
             <div className={styles.footerContent}>
                 <div className={styles.footerLinks}>
                     <nav>
-                        <Link href="/teams">NHL Teams 🏒</Link>
-                        <Link href="/schedule">Current NHL Schedule 📅</Link>
+                        <Link href="/">Home</Link>
                     </nav>
                 </div>
                 

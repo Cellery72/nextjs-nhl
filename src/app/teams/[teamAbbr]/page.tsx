@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { NHL_TEAMS } from '@/types/team-names';
 import styles from './TeamPage.module.css';
 import Image from 'next/image';
+import TeamMembersList from './TeamMembersList';
 
 interface TeamPageProps {
     params: {
@@ -9,8 +10,8 @@ interface TeamPageProps {
     }
 }
 
-export default function TeamPage({ params }: TeamPageProps) {
-    const team = NHL_TEAMS.find(team => team.abbrv === params.teamAbbr.toUpperCase());
+export default async function TeamPage({ params }: TeamPageProps) {
+    const team = NHL_TEAMS.find(team => team.abbrv.toUpperCase() === params.teamAbbr.toUpperCase());
     
     if (!team) {
         notFound();
@@ -28,7 +29,7 @@ export default function TeamPage({ params }: TeamPageProps) {
                     />
                 </div>
                 <h1 className={styles.teamName}>{team.name}</h1>
-                {/* Add more team-specific content here */}
+                <TeamMembersList teamAbbr={team.abbrv} />
             </div>
         </div>
     );

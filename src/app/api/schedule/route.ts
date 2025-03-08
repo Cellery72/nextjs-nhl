@@ -18,6 +18,6 @@ export async function GET(request: Request) {
     return NextResponse.json({ schedule, standings });
   } catch (error) {
     console.error('Error fetching NHL data:', error);
-    return NextResponse.json({ error: 'Failed to fetch NHL data' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to fetch NHL Schedule data' }, { status: 500 });
   }
 } 

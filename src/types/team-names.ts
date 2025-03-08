@@ -23,6 +23,7 @@ export const NHL_TEAMS: NHLTeamName[] = [
   { abbrv: "NSH", name: "Nashville Predators" },
   { abbrv: "NJD", name: "New Jersey Devils" },
   { abbrv: "NYI", name: "New York Islanders" },
+  { abbrv: "NYR", name: "New York Rangers" },
   { abbrv: "OTT", name: "Ottawa Senators" },
   { abbrv: "PHI", name: "Philadelphia Flyers" },
   { abbrv: "PIT", name: "Pittsburgh Penguins" },
