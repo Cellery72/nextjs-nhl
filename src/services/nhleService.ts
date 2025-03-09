@@ -1,6 +1,13 @@
+import { Player } from '@/types/players';
 import APIService from './apiService';
 import { NHLSchedule } from '@/types/schedule';
 import { Standings } from '@/types/standings';
+
+interface RosterResponse {
+  forwards: Player[];
+  defensemen: Player[];
+  goalies: Player[];
+}
 
 export class NHLEService {
   private static instance: NHLEService;
@@ -39,7 +46,7 @@ export class NHLEService {
   }
 
   // Standings related endpoints
-  async getStandingsNow() : Promise<Standings> {
+  async getStandingsNow(): Promise<Standings> {
     return await this.apiService.get(`/v1/standings/now`);
   }
 
@@ -56,9 +63,14 @@ export class NHLEService {
     return await this.apiService.get(`/v1/score/${date}`);
   }
 
-  // Team related endpoints
-  async getTeamRoster(teamCode: string) {
-    return await this.apiService.get(`/v1/roster/${teamCode}/current`);
+
+  async getTeamRoster(teamCode: string): Promise<Player[]> {
+    const data = await this.apiService.get<RosterResponse>(`/v1/roster/${teamCode}/current`);
+    return [
+      ...data.forwards,
+      ...data.defensemen,
+      ...data.goalies
+    ];
   }
 
   async getTeamStats(teamCode: string) {

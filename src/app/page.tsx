@@ -33,7 +33,7 @@ export default async function Home() {
           </Link>
 
           <Link
-            className="btn-secondPary flex items-center justify-center min-w-[180px]"
+            className="btn-secondary flex items-center justify-center min-w-[180px]"
             href="/schedule"
           >
             View Current Schedule 📅

@@ -4,15 +4,15 @@ import styles from './TeamPage.module.css';
 import Image from 'next/image';
 import TeamMembersList from './TeamMembersList';
 
-interface TeamPageProps {
-    params: {
-        teamAbbr: string;
-    }
-}
 
-export default async function TeamPage({ params }: TeamPageProps) {
-    const team = NHL_TEAMS.find(team => team.abbrv.toUpperCase() === params.teamAbbr.toUpperCase());
-    
+
+
+type Params = Promise<{teamAbbr: string}>
+
+export default async function TeamPage({ params }: { params: Params }) {
+    const teamAbbr = await params;
+    const team = NHL_TEAMS.find(team => team.abbrv.toUpperCase() === teamAbbr.teamAbbr.toUpperCase());
+
     if (!team) {
         notFound();
     }
@@ -20,7 +20,7 @@ export default async function TeamPage({ params }: TeamPageProps) {
     return (
         <div className={styles.container}>
             <div className={styles.content}>
-                <div className={styles.logoContainer}>
+                <div className={styles.logoContainer}> 
                     <Image 
                         src={`https://assets.nhle.com/logos/nhl/svg/${team.abbrv}_light.svg`}
                         alt={`${team.name} logo`}

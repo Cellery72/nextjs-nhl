@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { NHLEService } from "@/services/nhleService";
+import { Player } from "@/types/players";
 
 export async function GET(request: Request) {
     try {
@@ -11,15 +12,7 @@ export async function GET(request: Request) {
         }
 
         const nhleService = NHLEService.getInstance();
-        const rosterResponse: any = await nhleService.getTeamRoster(teamAbbr);
-        
-        // Combine all players into a single array
-        const allPlayers = [
-            ...rosterResponse.forwards,
-            ...rosterResponse.defensemen,
-            ...rosterResponse.goalies
-        ];
-
+        const allPlayers: Player[] = await nhleService.getTeamRoster(teamAbbr);
         return NextResponse.json(allPlayers);
     }
     catch (error) {
