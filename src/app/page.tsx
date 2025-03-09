@@ -15,7 +15,7 @@ export default async function Home() {
         <div className="mt-12 flex justify-center">
           <div className="bg-white rounded-full p-4 shadow-sm border-2 border-gray-900">
             <Image
-              src="/nhl.png"
+              src="/NHL.png"
               alt="NHL Logo"
               width={180}
               height={180}
