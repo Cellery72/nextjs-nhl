@@ -4,7 +4,12 @@ This is a [Next.js](https://nextjs.org) application, consuming the NHL API. I bu
 
 It's a work in progress, just like everything else on the internet. Feedback is always welcome!
 
-## Getting Started
+## Live Site
+If you want to see it in action, here's a link to my deployment on Vercel
+
+https://nextjs-nhl.vercel.app/
+
+## Development & Getting Started
 Run the development server:
 
 ```bash
