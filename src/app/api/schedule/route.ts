@@ -15,7 +15,16 @@ export async function GET(request: Request) {
       
     const standings = await nhleService.getStandingsNow();
     
-    return NextResponse.json({ schedule, standings });
+    // Get the new schedule format data
+    const scoreSchedule = date
+      ? await nhleService.getScoreScheduleByDate(date)
+      : await nhleService.getScoreScheduleNow();
+    
+    return NextResponse.json({ 
+      schedule, 
+      standings,
+      scoreSchedule 
+    });
   } catch (error) {
     console.error('Error fetching NHL data:', error);
     return NextResponse.json({ error: 'Failed to fetch NHL Schedule data' }, { status: 500 });

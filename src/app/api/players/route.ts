@@ -13,6 +13,7 @@ export async function GET(request: Request) {
 
         const nhleService = NHLEService.getInstance();
         const allPlayers: Player[] = await nhleService.getTeamRoster(teamAbbr);
+        console.log(allPlayers);
         return NextResponse.json(allPlayers);
     }
     catch (error) {

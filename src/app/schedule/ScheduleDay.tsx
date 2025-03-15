@@ -1,6 +1,6 @@
 'use client';
 import GameComponent from '@/components/game/Game';
-import { NHLGame } from '@/types/schedule';
+import { Game, ScheduleResponse } from '@/types/schedule';
 import { Standings } from '@/types/standings';
 import { useState, useEffect } from 'react';
 
@@ -9,8 +9,9 @@ interface ScheduleDayProps {
 }
 
 interface ScheduleData {
-  games: NHLGame[];
+  games: Game[];
   standings: Standings;
+  scoreSchedule: ScheduleResponse;
 }
 
 export default function ScheduleDay({ date }: ScheduleDayProps) {
@@ -25,9 +26,15 @@ export default function ScheduleDay({ date }: ScheduleDayProps) {
         const response = await fetch(`/api/schedule?date=${date.toISOString().split('T')[0]}`);
         const data = await response.json();
 
+        const dateString = date.toISOString().split('T')[0];
+        const gamesForDate = data.scoreSchedule.gamesByDate.find(
+          (dayData: { date: string }) => dayData.date === dateString
+        )?.games || [];
+
         setScheduleData({
-          games: data.schedule.gameWeek[0].games,
-          standings: data.standings
+          games: gamesForDate.length > 0 ? gamesForDate : data.schedule.gameWeek[0].games,
+          standings: data.standings,
+          scoreSchedule: data.scoreSchedule
         });
 
       } catch (error) {
@@ -67,6 +74,7 @@ export default function ScheduleDay({ date }: ScheduleDayProps) {
                 game={game}
                 homeStandings={scheduleData.standings.standings?.find(team => team.teamAbbrev.default === game.homeTeam.abbrev)}
                 awayStandings={scheduleData.standings.standings?.find(team => team.teamAbbrev.default === game.awayTeam.abbrev)}
+                scoreSchedule={scheduleData.scoreSchedule}
               />
             </div>
           ))}

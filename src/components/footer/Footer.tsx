@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { FaTwitter, FaLinkedin, FaGithub, FaYCombinator } from "react-icons/fa";
 import styles from "./Footer.module.css";
+import { FaLinkedin, FaGithub, FaYCombinator } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 const Footer: React.FC = () => {
     return (
@@ -15,10 +16,10 @@ const Footer: React.FC = () => {
                 <div className={styles.socialLinks}>
                     <h4>Find me on the web</h4>
                     <div>
-                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                            <FaTwitter />
+                        <a href="https://x.com/Ellery_Justin" target="_blank" rel="noopener noreferrer">
+                            <FaXTwitter />
                         </a>
-                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                        <a href="https://www.linkedin.com/in/jellery/" target="_blank" rel="noopener noreferrer">
                             <FaLinkedin />
                         </a>
                         <a href="https://github.com/cellery72" target="_blank" rel="noopener noreferrer">
@@ -32,8 +33,8 @@ const Footer: React.FC = () => {
             </div>
             
             <div className={styles.footerBottom}>
-                <p>Made for fun by <a href="https://justinellery.dev/" target="_blank" rel="noopener noreferrer">Justin Ellery</a>. All rights reserved.</p>
-                <p> Copyright 2025 &copy;</p>
+                <p>Made for fun by <a href="https://justinellery.dev/" target="_blank" rel="noopener noreferrer">Justin Ellery</a>.</p>
+                <p> Copyright 2025 &copy; All rights reserved.</p>
                 <p>Data provided by <a href="https://api-web.nhle.com" target="_blank" rel="noopener noreferrer">NHL.com</a></p>
             </div>
         </footer>

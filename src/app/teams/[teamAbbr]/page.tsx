@@ -4,9 +4,6 @@ import styles from './TeamPage.module.css';
 import Image from 'next/image';
 import TeamMembersList from './TeamMembersList';
 
-
-
-
 type Params = Promise<{teamAbbr: string}>
 
 export default async function TeamPage({ params }: { params: Params }) {

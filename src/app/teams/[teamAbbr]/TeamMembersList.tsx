@@ -2,12 +2,13 @@
 import { Player } from '@/types/players';
 import { useState, useEffect } from 'react';
 import styles from './TeamMembersList.module.css';
+import Image from 'next/image';
 
 interface TeamMembersListProps {
     teamAbbr: string;
 }   
 
-type SortField = 'sweaterNumber' | 'name' | 'positionCode' | 'birthDate' | 'birthCountry';
+type SortField = 'headshot' | 'name' | 'sweaterNumber' | 'positionCode' | 'shootsCatches' | 'height' | 'weight' | 'birthDate' | 'birthplace';
 type SortDirection = 'asc' | 'desc';
 
 export default function TeamMembersList({ teamAbbr }: TeamMembersListProps) {
@@ -15,17 +16,16 @@ export default function TeamMembersList({ teamAbbr }: TeamMembersListProps) {
     const [isLoading, setIsLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [positionFilter, setPositionFilter] = useState('ALL');
-    const [sortField, setSortField] = useState<SortField>('sweaterNumber');
+    const [shootsFilter, setShootsFilter] = useState('ALL');
+    const [sortField, setSortField] = useState<SortField>('name');
     const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
 
     useEffect(() => {
         setIsLoading(true);
-        console.log('fetching team members for', teamAbbr);
         const fetchTeamMembers = async () => {
             try{
                 const response = await fetch(`/api/players?teamAbbr=${teamAbbr}`);
                 const data = await response.json();
-                console.log('response from api/players', data);
                 setTeamMembers(data);
             }
             catch(error){
@@ -45,6 +45,9 @@ export default function TeamMembersList({ teamAbbr }: TeamMembersListProps) {
 
     // Get unique positions for the filter dropdown
     const positions = ['ALL', ...new Set(teamMembers.map(player => player.positionCode))];
+    
+    // Get unique shoots/catches options for filter dropdown
+    const shootsOptions = ['ALL', ...new Set(teamMembers.map(player => player.shootsCatches))];
 
     const handleSort = (field: SortField) => {
         if (sortField === field) {
@@ -55,27 +58,76 @@ export default function TeamMembersList({ teamAbbr }: TeamMembersListProps) {
         }
     };
 
+    // Format height in feet and inches
+    const formatHeight = (inches: number) => {
+        const feet = Math.floor(inches / 12);
+        const remainingInches = inches % 12;
+        return `${feet}'${remainingInches}"`;
+    };
+
+    // Format weight with lbs
+    const formatWeight = (pounds: number) => {
+        return `${pounds} lbs`;
+    };
+
+    // Format date as MMM DD, YYYY
+    const formatDate = (dateString: string) => {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric'
+        });
+    };
+
+    // Format birthplace as City, State/Province, Country
+    const formatBirthplace = (player: Player) => {
+        let birthplace = player.birthCity.default;
+        
+        if (player.birthStateProvince) {
+            birthplace += `, ${player.birthStateProvince.default}`;
+        }
+        
+        birthplace += `, ${player.birthCountry}`;
+        
+        return birthplace;
+    };
+
     // Filter and sort players
     const sortedAndFilteredPlayers = teamMembers
         .filter(player => {
             const fullName = `${player.firstName.default} ${player.lastName.default}`.toLowerCase();
+            const birthplace = formatBirthplace(player).toLowerCase();
             const searchLower = searchTerm.toLowerCase();
             
             // Check if search matches any of the fields
             const matchesSearch = 
                 fullName.includes(searchLower) || 
-                player.birthCountry.toLowerCase().includes(searchLower) ||
+                birthplace.includes(searchLower) ||
                 player.positionCode.toLowerCase().includes(searchLower) ||
-                (player.sweaterNumber?.toString() || '').includes(searchLower) ||
-                player.birthDate.toLowerCase().includes(searchLower);
+                player.shootsCatches.toLowerCase().includes(searchLower) ||
+                (player.sweaterNumber?.toString() || '').includes(searchLower);
             
             const matchesPosition = positionFilter === 'ALL' || player.positionCode === positionFilter;
-            return matchesSearch && matchesPosition;
+            const matchesShoots = shootsFilter === 'ALL' || player.shootsCatches === shootsFilter;
+            
+            return matchesSearch && matchesPosition && matchesShoots;
         })
         .sort((a, b) => {
             let compareValue = 0;
             
             switch (sortField) {
+                case 'headshot':
+                    // Sort by name when sorting by headshot
+                    const nameA = `${a.firstName.default} ${a.lastName.default}`.toLowerCase();
+                    const nameB = `${b.firstName.default} ${b.lastName.default}`.toLowerCase();
+                    compareValue = nameA.localeCompare(nameB);
+                    break;
+                case 'name':
+                    const fullNameA = `${a.firstName.default} ${a.lastName.default}`.toLowerCase();
+                    const fullNameB = `${b.firstName.default} ${b.lastName.default}`.toLowerCase();
+                    compareValue = fullNameA.localeCompare(fullNameB);
+                    break;
                 case 'sweaterNumber':
                     // If either number is missing, put it at the bottom
                     if (!a.sweaterNumber && !b.sweaterNumber) return 0;
@@ -83,19 +135,25 @@ export default function TeamMembersList({ teamAbbr }: TeamMembersListProps) {
                     if (!b.sweaterNumber) return -1;
                     compareValue = parseInt(a.sweaterNumber.toString()) - parseInt(b.sweaterNumber.toString());
                     break;
-                case 'name':
-                    const nameA = `${a.firstName.default} ${a.lastName.default}`.toLowerCase();
-                    const nameB = `${b.firstName.default} ${b.lastName.default}`.toLowerCase();
-                    compareValue = nameA.localeCompare(nameB);
-                    break;
                 case 'positionCode':
                     compareValue = a.positionCode.localeCompare(b.positionCode);
+                    break;
+                case 'shootsCatches':
+                    compareValue = a.shootsCatches.localeCompare(b.shootsCatches);
+                    break;
+                case 'height':
+                    compareValue = a.heightInInches - b.heightInInches;
+                    break;
+                case 'weight':
+                    compareValue = a.weightInPounds - b.weightInPounds;
                     break;
                 case 'birthDate':
                     compareValue = new Date(a.birthDate).getTime() - new Date(b.birthDate).getTime();
                     break;
-                case 'birthCountry':
-                    compareValue = a.birthCountry.localeCompare(b.birthCountry);
+                case 'birthplace':
+                    const birthplaceA = formatBirthplace(a);
+                    const birthplaceB = formatBirthplace(b);
+                    compareValue = birthplaceA.localeCompare(birthplaceB);
                     break;
             }
 
@@ -105,44 +163,6 @@ export default function TeamMembersList({ teamAbbr }: TeamMembersListProps) {
     const getSortIcon = (field: SortField) => {
         if (sortField !== field) return '↕️';
         return sortDirection === 'asc' ? '↑' : '↓';
-    };
-
-    // Add this helper function inside the component
-    const getCountryFlag = (countryCode: string) => {
-        // Special case for some common countries that might have different codes
-        const specialCases: { [key: string]: string } = {
-            'USA': 'US',
-            'RUS': 'RU',
-            'CAN': 'CA',
-            'MEX': 'MX',
-            'AUS': 'AU',
-            'GBR': 'UK',
-            'FRA': 'FR',
-            'ITA': 'IT',
-            'SWE': 'SE',
-            'FIN': 'FI',
-            'NOR': 'NO',
-            'DEN': 'DK',
-            'AUT': 'AT',
-            'CZE': 'CZ',
-            'SVK': 'SK',
-            'POL': 'PL',
-            'HUN': 'HU',
-            'ROU': 'RO',
-            'BUL': 'BG'
-            // Add more special cases as needed
-        };
-
-        // Convert country code to 2-letter code
-        const code = (specialCases[countryCode] || countryCode).slice(0, 2);
-        
-        // Regional indicator symbols are in range 127462 (🇦) to 127487 (🇿)
-        return code
-            .toUpperCase()
-            .split('')
-            .map(char => 127397 + char.charCodeAt(0))
-            .map(code => String.fromCodePoint(code))
-            .join('');
     };
 
     return (
@@ -170,7 +190,19 @@ export default function TeamMembersList({ teamAbbr }: TeamMembersListProps) {
                 >
                     {positions.map(position => (
                         <option key={position} value={position}>
-                            {position}
+                            {position === 'ALL' ? 'All Positions' : position}
+                        </option>
+                    ))}
+                </select>
+                
+                <select
+                    value={shootsFilter}
+                    onChange={(e) => setShootsFilter(e.target.value)}
+                    className={styles.positionFilter}
+                >
+                    {shootsOptions.map(option => (
+                        <option key={option} value={option}>
+                            {option === 'ALL' ? 'All Shoots/Catches' : `${option === 'L' ? 'Left' : 'Right'}`}
                         </option>
                     ))}
                 </select>
@@ -179,31 +211,59 @@ export default function TeamMembersList({ teamAbbr }: TeamMembersListProps) {
             <table className={styles.table}>
                 <thead>
                     <tr>
-                        <th onClick={() => handleSort('sweaterNumber')} className={styles.sortable}>
-                            Number {getSortIcon('sweaterNumber')}
+                        <th onClick={() => handleSort('headshot')} className={styles.sortable}>
+                            Photo {getSortIcon('headshot')}
                         </th>
                         <th onClick={() => handleSort('name')} className={styles.sortable}>
                             Name {getSortIcon('name')}
                         </th>
+                        <th onClick={() => handleSort('sweaterNumber')} className={styles.sortable}>
+                            # {getSortIcon('sweaterNumber')}
+                        </th>
                         <th onClick={() => handleSort('positionCode')} className={styles.sortable}>
-                            Position {getSortIcon('positionCode')}
+                            Pos {getSortIcon('positionCode')}
+                        </th>
+                        <th onClick={() => handleSort('shootsCatches')} className={styles.sortable}>
+                            Shoots/Catches {getSortIcon('shootsCatches')}
+                        </th>
+                        <th onClick={() => handleSort('height')} className={styles.sortable}>
+                            Height {getSortIcon('height')}
+                        </th>
+                        <th onClick={() => handleSort('weight')} className={styles.sortable}>
+                            Weight {getSortIcon('weight')}
                         </th>
                         <th onClick={() => handleSort('birthDate')} className={styles.sortable}>
-                            Date of Birth {getSortIcon('birthDate')}
+                            DOB {getSortIcon('birthDate')}
                         </th>
-                        <th onClick={() => handleSort('birthCountry')} className={styles.sortable}>
-                            Nationality {getSortIcon('birthCountry')}
+                        <th onClick={() => handleSort('birthplace')} className={styles.sortable}>
+                            Birthplace {getSortIcon('birthplace')}
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     {sortedAndFilteredPlayers.map((player) => (
                         <tr key={player.id}>
-                            <td>{player.sweaterNumber}</td>
+                            <td className={styles.playerImage}>
+                                {player.headshot ? (
+                                    <Image 
+                                        src={player.headshot} 
+                                        alt={`${player.firstName.default} ${player.lastName.default}`}
+                                        width={60} 
+                                        height={60}
+                                        className={styles.headshot}
+                                    />
+                                ) : (
+                                    <div className={styles.placeholderImage}>No Image</div>
+                                )}
+                            </td>
                             <td>{player.firstName.default} {player.lastName.default}</td>
+                            <td>{player.sweaterNumber}</td>
                             <td>{player.positionCode}</td>
-                            <td>{player.birthDate}</td>
-                            <td>{getCountryFlag(player.birthCountry)} {player.birthCountry}</td>
+                            <td>{player.shootsCatches === 'L' ? 'Left' : 'Right'}</td>
+                            <td>{formatHeight(player.heightInInches)}</td>
+                            <td>{formatWeight(player.weightInPounds)}</td>
+                            <td>{formatDate(player.birthDate)}</td>
+                            <td>{formatBirthplace(player)}</td>
                         </tr>
                     ))}
                 </tbody>

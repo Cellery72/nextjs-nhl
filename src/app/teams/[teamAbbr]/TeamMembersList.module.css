@@ -23,6 +23,7 @@
     background-color: white;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    table-layout: fixed;
 }
 
 .table th {
@@ -33,6 +34,7 @@
     text-align: left;
     border-bottom: 2px solid #e5e7eb;
     position: relative;
+    white-space: nowrap;
 }
 
 .table td {
@@ -49,6 +51,7 @@
     display: flex;
     gap: 1rem;
     margin-bottom: 1rem;
+    flex-wrap: wrap;
 }
 
 .searchInput {
@@ -58,6 +61,7 @@
     border-radius: 4px;
     font-size: 0.875rem;
     color: #374151;
+    min-width: 200px;
 }
 
 .searchInput:focus {
@@ -94,4 +98,30 @@
 .countInfo {
     font-size: 0.9rem;
     color: #666;
+}
+
+/* New styles for player images */
+.playerImage {
+    width: 70px;
+    text-align: center;
+}
+
+.headshot {
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #e5e7eb;
+}
+
+.placeholderImage {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #f3f4f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: #6b7280;
+    margin: 0 auto;
+    border: 2px solid #e5e7eb;
 } 

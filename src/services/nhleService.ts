@@ -1,6 +1,6 @@
 import { Player } from '@/types/players';
 import APIService from './apiService';
-import { NHLSchedule } from '@/types/schedule';
+import { NHLSchedule, ScheduleResponse } from '@/types/schedule';
 import { Standings } from '@/types/standings';
 
 interface RosterResponse {
@@ -33,6 +33,15 @@ export class NHLEService {
     return await this.apiService.get(`/v1/schedule/${date}`);
   }
 
+  // New method to get the schedule with the updated format
+  async getScoreScheduleByDate(date: string): Promise<ScheduleResponse> {
+    return await this.apiService.get<ScheduleResponse>(`/v1/scoreboard/${date}`);
+  }
+
+  async getScoreScheduleNow(): Promise<ScheduleResponse> {
+    return await this.apiService.get<ScheduleResponse>('/v1/scoreboard/now');
+  }
+
   async getTeamScheduleNow(teamCode: string) {
     return await this.apiService.get(`/v1/club-schedule/${teamCode}/week/now`);
   }
@@ -55,14 +64,13 @@ export class NHLEService {
   }
 
   // Score related endpoints
-  async getScoresNow() {
-    return await this.apiService.get(`/v1/score/now`);
+  async getScoresNow() : Promise<ScheduleResponse> {
+    return await this.apiService.get<ScheduleResponse>(`/v1/score/now`);
   }
 
-  async getScoresByDate(date: string) {
-    return await this.apiService.get(`/v1/score/${date}`);
+  async getScoresByDate(date: string) : Promise<ScheduleResponse> {
+    return await this.apiService.get<ScheduleResponse>(`/v1/score/${date}`);
   }
-
 
   async getTeamRoster(teamCode: string): Promise<Player[]> {
     const data = await this.apiService.get<RosterResponse>(`/v1/roster/${teamCode}/current`);
