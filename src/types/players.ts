@@ -133,6 +133,10 @@ export interface PlayerLanding extends BasePlayer {
     teamLogo: string;
     position: string;
     heroImage: string;
+    actionImage: string;
+    currentSeason?: {
+        regularSeason: PlayerStats;
+    };
     draftDetails?: {
         year: number;
         teamAbbrev: string;

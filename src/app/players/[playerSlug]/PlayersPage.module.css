@@ -12,71 +12,104 @@
     padding: 2rem;
 }
 
-.playerInfo {
+/* First Row Styles */
+.headerRow {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 2rem;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
     margin-bottom: 2rem;
+}
+
+.playerName {
+    font-size: 2.5rem;
+    color: #1a1a1a;
+    margin: 0;
+    flex: 1;
+}
+
+.teamLogo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.jerseyNumber {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    padding: 0.5rem 1rem;
+    background-color: #e9ecef;
+    border-radius: 4px;
+}
+
+.positionCode {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    padding: 0.5rem 1rem;
+    background-color: #e9ecef;
+    border-radius: 4px;
+}
+
+/* Second Row Styles */
+.actionImageRow {
+    width: 100%;
+    aspect-ratio: 1296/729;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+.actionImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Third Row Styles */
+.statsRow {
+    display: grid;
+    grid-template-columns: 300px 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
 }
 
 .headshotContainer {
     position: relative;
-    width: 300px;
-    height: 300px;
-    border-radius: 8px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.39);
+    background-color: #2c2a2a8c;
+    padding: 4px;
 }
 
 .headshotContainer img {
     object-fit: cover;
     width: 100%;
     height: 100%;
+    border-radius: 50%;
 }
 
-.playerName {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #1a1a1a;
-    text-align: center;
-    margin: 0;
-}
-
-.playerDetails {
-    display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 2rem;
-}
-
-.detailItem {
-    text-align: center;
-    padding: 1rem;
+.careerStats {
     background-color: #f8f9fa;
+    padding: 1.5rem;
     border-radius: 8px;
-    min-width: 150px;
 }
 
-.detailLabel {
-    font-size: 0.875rem;
-    color: #666;
-    margin-bottom: 0.5rem;
-}
-
-.detailValue {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #1a1a1a;
-}
-
-.statsSection {
-    margin-top: 2rem;
+.currentStats {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
 }
 
 .statsTitle {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 600;
     color: #1a1a1a;
     margin-bottom: 1rem;
@@ -84,14 +117,14 @@
 
 .statsGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
 }
 
 .statCard {
-    background-color: #f8f9fa;
+    background-color: white;
     padding: 1rem;
-    border-radius: 8px;
+    border-radius: 4px;
     text-align: center;
 }
 
@@ -102,9 +135,20 @@
 }
 
 .statValue {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 600;
     color: #1a1a1a;
+}
+
+@media (max-width: 1024px) {
+    .statsRow {
+        grid-template-columns: 1fr;
+    }
+    
+    .headshotContainer {
+        width: 100%;
+        height: 250px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -112,20 +156,16 @@
         padding: 1rem;
     }
 
+    .headerRow {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
     .playerName {
         font-size: 2rem;
     }
 
-    .headshotContainer {
-        width: 200px;
-        height: 200px;
-    }
-
-    .detailItem {
-        min-width: 120px;
-    }
-
-    .statsGrid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    .actionImageRow {
+        aspect-ratio: 1296/729;
     }
 }

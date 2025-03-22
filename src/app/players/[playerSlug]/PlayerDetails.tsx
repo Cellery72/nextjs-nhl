@@ -29,94 +29,115 @@ interface PlayerDetailsProps {
 
 export default function PlayerDetails({ player }: PlayerDetailsProps) {
     const careerStats = player.careerTotals.regularSeason;
+    const currentSeasonStats = player.currentSeason?.regularSeason || careerStats;
 
     return (
         <div className={styles.container}>
             <div className={styles.content}>
-                <div className={styles.playerInfo}>
+                {/* First Row - Header */}
+                <div className={styles.headerRow}>
+                    <h1 className={styles.playerName}>
+                        {player.firstName.default} {player.lastName.default}
+                    </h1>
+                    <Image 
+                        src={player.teamLogo}
+                        alt={`${player.teamCommonName.default} logo`}
+                        width={80}
+                        height={80}
+                        className={styles.teamLogo}
+                    />
+                    <div className={styles.jerseyNumber}>
+                        #{player.sweaterNumber || 'N/A'}
+                    </div>
+                    <div className={styles.positionCode}>
+                        {player.position}
+                    </div>
+                </div>
+
+                {/* Second Row - Action Image */}
+                <div className={styles.actionImageRow}>
+                    <Image 
+                        src={player.heroImage}
+                        alt={`${player.firstName.default} ${player.lastName.default} in action`}
+                        width={1296}
+                        height={729}
+                        className={styles.actionImage}
+                        priority
+                    />
+                </div>
+
+                {/* Third Row - Stats */}
+                <div className={styles.statsRow}>
+                    {/* Headshot */}
                     <div className={styles.headshotContainer}>
                         <Image 
                             src={player.headshot}
                             alt={`${player.firstName.default} ${player.lastName.default}`}
                             width={300}
                             height={300}
-                            priority
                         />
                     </div>
-                    <h1 className={styles.playerName}>
-                        {player.firstName.default} {player.lastName.default}
-                    </h1>
-                </div>
 
-                <div className={styles.playerDetails}>
-                    <div className={styles.detailItem}>
-                        <div className={styles.detailLabel}>Position</div>
-                        <div className={styles.detailValue}>{player.position}</div>
-                    </div>
-                    <div className={styles.detailItem}>
-                        <div className={styles.detailLabel}>Number</div>
-                        <div className={styles.detailValue}>{player.sweaterNumber || 'N/A'}</div>
-                    </div>
-                    <div className={styles.detailItem}>
-                        <div className={styles.detailLabel}>Height</div>
-                        <div className={styles.detailValue}>{formatHeight(player.heightInInches)}</div>
-                    </div>
-                    <div className={styles.detailItem}>
-                        <div className={styles.detailLabel}>Weight</div>
-                        <div className={styles.detailValue}>{formatWeight(player.weightInPounds)}</div>
-                    </div>
-                    <div className={styles.detailItem}>
-                        <div className={styles.detailLabel}>Born</div>
-                        <div className={styles.detailValue}>{formatDate(player.birthDate)}</div>
-                    </div>
-                    <div className={styles.detailItem}>
-                        <div className={styles.detailLabel}>Birthplace</div>
-                        <div className={styles.detailValue}>
-                            {player.birthCity.default}
-                            {player.birthStateProvince ? `, ${player.birthStateProvince.default}` : ''}
+                    {/* Career Stats */}
+                    <div className={styles.careerStats}>
+                        <h2 className={styles.statsTitle}>Career Statistics</h2>
+                        <div className={styles.statsGrid}>
+                            <div className={styles.statCard}>
+                                <div className={styles.statLabel}>Games Played</div>
+                                <div className={styles.statValue}>{careerStats.gamesPlayed}</div>
+                            </div>
+                            <div className={styles.statCard}>
+                                <div className={styles.statLabel}>Goals</div>
+                                <div className={styles.statValue}>{careerStats.goals}</div>
+                            </div>
+                            <div className={styles.statCard}>
+                                <div className={styles.statLabel}>Assists</div>
+                                <div className={styles.statValue}>{careerStats.assists}</div>
+                            </div>
+                            <div className={styles.statCard}>
+                                <div className={styles.statLabel}>Points</div>
+                                <div className={styles.statValue}>{careerStats.points}</div>
+                            </div>
+                            <div className={styles.statCard}>
+                                <div className={styles.statLabel}>+/-</div>
+                                <div className={styles.statValue}>{careerStats.plusMinus}</div>
+                            </div>
+                            <div className={styles.statCard}>
+                                <div className={styles.statLabel}>PIM</div>
+                                <div className={styles.statValue}>{careerStats.pim}</div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div className={styles.statsSection}>
-                    <h2 className={styles.statsTitle}>Career Statistics</h2>
-                    <div className={styles.statsGrid}>
-                        <div className={styles.statCard}>
-                            <div className={styles.statLabel}>Games Played</div>
-                            <div className={styles.statValue}>{careerStats.gamesPlayed}</div>
-                        </div>
-                        <div className={styles.statCard}>
-                            <div className={styles.statLabel}>Goals</div>
-                            <div className={styles.statValue}>{careerStats.goals}</div>
-                        </div>
-                        <div className={styles.statCard}>
-                            <div className={styles.statLabel}>Assists</div>
-                            <div className={styles.statValue}>{careerStats.assists}</div>
-                        </div>
-                        <div className={styles.statCard}>
-                            <div className={styles.statLabel}>Points</div>
-                            <div className={styles.statValue}>{careerStats.points}</div>
-                        </div>
-                        <div className={styles.statCard}>
-                            <div className={styles.statLabel}>+/-</div>
-                            <div className={styles.statValue}>{careerStats.plusMinus}</div>
-                        </div>
-                        <div className={styles.statCard}>
-                            <div className={styles.statLabel}>PIM</div>
-                            <div className={styles.statValue}>{careerStats.pim}</div>
-                        </div>
-                        {careerStats.avgToi && (
+                    {/* Current Season Stats */}
+                    <div className={styles.currentStats}>
+                        <h2 className={styles.statsTitle}>Current Season</h2>
+                        <div className={styles.statsGrid}>
                             <div className={styles.statCard}>
-                                <div className={styles.statLabel}>Avg TOI</div>
-                                <div className={styles.statValue}>{careerStats.avgToi}</div>
+                                <div className={styles.statLabel}>Games Played</div>
+                                <div className={styles.statValue}>{currentSeasonStats.gamesPlayed}</div>
                             </div>
-                        )}
-                        {careerStats.faceoffWinningPctg && (
                             <div className={styles.statCard}>
-                                <div className={styles.statLabel}>FO%</div>
-                                <div className={styles.statValue}>{careerStats.faceoffWinningPctg.toFixed(1)}%</div>
+                                <div className={styles.statLabel}>Goals</div>
+                                <div className={styles.statValue}>{currentSeasonStats.goals}</div>
                             </div>
-                        )}
+                            <div className={styles.statCard}>
+                                <div className={styles.statLabel}>Assists</div>
+                                <div className={styles.statValue}>{currentSeasonStats.assists}</div>
+                            </div>
+                            <div className={styles.statCard}>
+                                <div className={styles.statLabel}>Points</div>
+                                <div className={styles.statValue}>{currentSeasonStats.points}</div>
+                            </div>
+                            <div className={styles.statCard}>
+                                <div className={styles.statLabel}>+/-</div>
+                                <div className={styles.statValue}>{currentSeasonStats.plusMinus}</div>
+                            </div>
+                            <div className={styles.statCard}>
+                                <div className={styles.statLabel}>PIM</div>
+                                <div className={styles.statValue}>{currentSeasonStats.pim}</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
