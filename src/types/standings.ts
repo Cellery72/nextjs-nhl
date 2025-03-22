@@ -1,7 +1,4 @@
-interface TeamName {
-  default: string;
-  fr?: string;
-}
+import { TeamName } from "./team";
 
 export interface StandingsTeam {
   conferenceAbbrev: string;
@@ -86,7 +83,7 @@ export interface StandingsTeam {
   wins: number;
 }
 
-export interface Standings {
+export interface NHLStandings {
   wildCardIndicator: boolean;
   standingsDateTimeUtc: string;
   standings: StandingsTeam[];

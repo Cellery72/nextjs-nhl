@@ -1,21 +1,17 @@
 'use client';
 import { useState } from 'react';
-import { Game as GameType, ScheduleResponse } from '@/types/schedule';
+import { Game } from '@/types/game';
 import { StandingsTeam } from '@/types/standings';
 import Image from 'next/image';
 import Link from 'next/link';
 
 interface GameProps {
-    game: GameType;
+    currentGame: Game;
     homeStandings?: StandingsTeam;
     awayStandings?: StandingsTeam;
-    scoreSchedule?: ScheduleResponse;
 }
 
-export default function Game({ game, homeStandings, awayStandings, scoreSchedule }: GameProps) {
-    if(game.gameState === "LIVE" || game.gameState==="CRIT") {
-        console.log(game);
-    }
+export default function GameComponent({ currentGame, homeStandings, awayStandings }: GameProps) {
     const [isExpanded, setIsExpanded] = useState(false);
 
     // Convert UTC to EST
@@ -37,10 +33,10 @@ export default function Game({ game, homeStandings, awayStandings, scoreSchedule
                 onClick={() => setIsExpanded(!isExpanded)}>
                 <div className="flex-1">
                     <h2 className="text-lg font-bold text-gray-800 mb-2">
-                        {game.homeTeam.commonName?.default || game.homeTeam.name?.default || ''} vs. {game.awayTeam.commonName?.default || game.awayTeam.name?.default || ''}
+                        {currentGame.homeTeam.commonName?.default || currentGame.homeTeam.name?.default || ''} vs. {currentGame.awayTeam.commonName?.default || currentGame.awayTeam.name?.default || ''}
                     </h2>
                     <p className="text-gray-600 text-sm font-medium">
-                        {formatGameTime(game.startTimeUTC)} EST
+                        {formatGameTime(currentGame.startTimeUTC)} EST
                     </p>
                 </div>
                 <button
@@ -61,17 +57,17 @@ export default function Game({ game, homeStandings, awayStandings, scoreSchedule
                     <div className="flex justify-between items-center">
                         {/* Home Team */}
                         <div className="text-center flex-1">
-                            <Link href={`/teams/${game.homeTeam.abbrev}`} className="block">
+                            <Link href={`/teams/${currentGame.homeTeam.abbrev}`} className="block">
                                 <div className="w-20 h-20 mx-auto mb-3 relative">
                                     <Image
-                                        src={`https://assets.nhle.com/logos/nhl/svg/${game.homeTeam.abbrev}_light.svg`}
-                                        alt={` ${game.homeTeam.commonName?.default || game.homeTeam.name?.default || ''} logo`}
+                                        src={`https://assets.nhle.com/logos/nhl/svg/${currentGame.homeTeam.abbrev}_light.svg`}
+                                        alt={` ${currentGame.homeTeam.commonName?.default || currentGame.homeTeam.name?.default || ''} logo`}
                                         fill
                                         className="object-contain"
                                     />
                                 </div>
                                 <p className="font-bold text-gray-800 mb-1 hover:text-blue-600 transition-colors">
-                                    {(game.homeTeam.placeName?.default || '') + ' ' + (game.homeTeam.commonName?.default || game.homeTeam.name?.default || '')}
+                                    {(currentGame.homeTeam.placeName?.default || '') + ' ' + (currentGame.homeTeam.commonName?.default || currentGame.homeTeam.name?.default || '')}
                                 </p>
                             </Link>
                             {homeStandings && (
@@ -85,9 +81,9 @@ export default function Game({ game, homeStandings, awayStandings, scoreSchedule
 
                         {/* Home Team Score - Only show if game is LIVE */}
                         <div className="text-center px-4">
-                            {(game.gameState === "LIVE" || game.gameState==="CRIT") && (
+                            {(currentGame.gameState === "LIVE" || currentGame.gameState==="CRIT" || currentGame.gameState==="OFF") && (
                                 <div className="text-3xl font-bold text-gray-800">
-                                    {game.homeTeam?.score || '0'}
+                                    {currentGame.homeTeam?.score || '0'}
                                 </div>
                             )}
                         </div>
@@ -96,26 +92,26 @@ export default function Game({ game, homeStandings, awayStandings, scoreSchedule
 
                         {/* Away Team Score - Only show if game is LIVE */}
                         <div className="text-center px-4">
-                            {(game.gameState === "LIVE" || game.gameState==="CRIT") && (
+                            {(currentGame.gameState === "LIVE" || currentGame.gameState==="CRIT" || currentGame.gameState==="OFF") && (
                                 <div className="text-3xl font-bold text-gray-800">
-                                    {game.awayTeam?.score || '0'}
+                                    {currentGame.awayTeam?.score || '0'}
                                 </div>
                             )}
                         </div>
 
                         {/* Away Team */}
                         <div className="text-center flex-1">
-                            <Link href={`/teams/${game.awayTeam.abbrev}`} className="block">
+                            <Link href={`/teams/${currentGame.awayTeam.abbrev}`} className="block">
                                 <div className="w-20 h-20 mx-auto mb-3 relative">
                                     <Image
-                                        src={`https://assets.nhle.com/logos/nhl/svg/${game.awayTeam.abbrev}_light.svg`}
-                                        alt={`${game.awayTeam.commonName?.default || game.awayTeam.name?.default || ''} logo`}
+                                        src={`https://assets.nhle.com/logos/nhl/svg/${currentGame.awayTeam.abbrev}_light.svg`}
+                                        alt={`${currentGame.awayTeam.commonName?.default || currentGame.awayTeam.name?.default || ''} logo`}
                                         fill
                                         className="object-contain"
                                     />
                                 </div>
                                 <p className="font-bold text-gray-800 mb-1 hover:text-blue-600 transition-colors">
-                                    {(game.awayTeam.placeName?.default || '') + ' ' + (game.awayTeam.commonName?.default || game.awayTeam.name?.default || '')}
+                                    {(currentGame.awayTeam.placeName?.default || '') + ' ' + (currentGame.awayTeam.commonName?.default || currentGame.awayTeam.name?.default || '')}
                                 </p>
                             </Link>
                             {awayStandings && (
@@ -128,26 +124,12 @@ export default function Game({ game, homeStandings, awayStandings, scoreSchedule
                         </div>
                     </div>
 
-                    {/* Game Period and Time Remaining - Only show if game is LIVE */}
-                    {(game.gameState === "LIVE" || game.gameState==="CRIT" )&& (
+                    {/* Game Status = Live*/}
+                    {(currentGame.gameState === "LIVE" || currentGame.gameState==="CRIT") && (
                         <div className="mt-4 text-center">
                             <p className="text-md font-semibold text-gray-700">
                                 {(() => {
-                                    // Find the game in the new structure with gamesByDate
-                                    let liveGame = null;
-                                    if (scoreSchedule) {
-                                        for (const dayData of scoreSchedule.gamesByDate || []) {
-                                            const foundGame = dayData.games.find(g => g.id === game.id);
-                                            if (foundGame) {
-                                                liveGame = foundGame;
-                                                break;
-                                            }
-                                        }
-                                    }
-                                    
-                                    if (!liveGame) return null;
-                                    
-                                    const period = liveGame.period;
+                                    const period = currentGame.period;
                                     let periodText = '';
                                     
                                     if (period === 1) periodText = '1st Period';
@@ -157,8 +139,17 @@ export default function Game({ game, homeStandings, awayStandings, scoreSchedule
                                     else if (period === 5) periodText = 'Shootout';
                                     else periodText = `Period ${period}`;
                                     
-                                    return `${periodText} - ${liveGame.clock?.timeRemaining || ''} remaining`;
+                                    return `${periodText} - ${currentGame.clock?.timeRemaining || ''} remaining`;
                                 })()}
+                            </p>
+                        </div>
+                    )}
+
+                    {/* Game Status - FINAL */}
+                    {currentGame.gameState === "OFF" && (
+                        <div className="mt-4 text-center">
+                            <p className="text-md font-semibold text-gray-700">
+                                Final
                             </p>
                         </div>
                     )}

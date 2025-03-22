@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { NHL_TEAMS } from '@/types/team-names';
+import { NHL_TEAMS } from '@/types/team';
 import styles from './TeamsList.module.css';
     
 export default function TeamsList() {
@@ -14,12 +14,12 @@ export default function TeamsList() {
                     <div className={styles.imageContainer}>
                         <Image 
                             src={`https://assets.nhle.com/logos/nhl/svg/${team.abbrv}_light.svg`} 
-                            alt={team.name}     
+                            alt={team.default}     
                             width={100} 
                             height={100} 
                         />
                     </div>
-                    <h2 className={styles.teamName}>{team.name}</h2>
+                    <h2 className={styles.teamName}>{team.default}</h2>
                 </Link>
             ))}
         </div>

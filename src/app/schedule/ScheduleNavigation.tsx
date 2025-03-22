@@ -1,52 +1,88 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ScheduleDay from './ScheduleDay';
+import { GameWeek } from '@/types/schedule';
+import { NHLStandings as NHLStandings } from '@/types/standings';
 
 interface ScheduleNavigationProps {
+  gamesThisWeek: GameWeek[];
+  standings: NHLStandings;
   initialDate?: Date;
 }
 
-export default function ScheduleNavigation({ initialDate = new Date() }: ScheduleNavigationProps) {
-  // Start by setting the time to midnight to avoid timezone issues
-  const normalizedInitialDate = new Date(initialDate);
+export default function ScheduleNavigation({ gamesThisWeek, standings, initialDate }: ScheduleNavigationProps) {
+  
+  const findGameDay = (date: Date) => {
+    const normalizedDate = new Date(date);
+    normalizedDate.setUTCHours(0, 0, 0, 0);
+    
+    return gamesThisWeek.find((day) => {
+      const dayDate = new Date(day.date);
+      dayDate.setUTCHours(0, 0, 0, 0);
+      return dayDate.getTime() === normalizedDate.getTime();
+    });
+  }
+
+  
+  const normalizedInitialDate = initialDate ? new Date(initialDate) : new Date();
   normalizedInitialDate.setHours(0, 0, 0, 0);
   
-  const [selectedDate, setSelectedDate] = useState(normalizedInitialDate);
+  // Find the first available game day if no initial date is provided
+  const defaultGameDay = !initialDate ? gamesThisWeek.find(day => {
+    const dayDate = new Date(day.date);
+    dayDate.setHours(0, 0, 0, 0);
+    return dayDate.getTime() >= normalizedInitialDate.getTime();
+  }) : null;
 
-  // Generate an array of dates for the week (3 days before and 3 days after today)
-  const dates = Array.from({ length: 7 }, (_, i) => {
-    const date = new Date(normalizedInitialDate);
-    date.setDate(normalizedInitialDate.getDate() - 3 + i);
-    return date;
-  });
+  const [selectedDate, setSelectedDate] = useState(defaultGameDay ? new Date(defaultGameDay.date) : normalizedInitialDate);
+  const [selectedGameDay, setSelectedGameDay] = useState(findGameDay(selectedDate));
+
+  useEffect(() => {
+    setSelectedGameDay(findGameDay(selectedDate));
+  }, [selectedDate]);
 
   return (
     <div className="w-full">
       <div className="border-b border-gray-200">
         <nav className="flex space-x-8" aria-label="Schedule Navigation">
-          {dates.map((date) => {
+          {gamesThisWeek.map((day) => {
             // Use ISO string for key and comparison to ensure consistency
-            const dateKey = date.toISOString().split('T')[0];
+            const dateKey = day.date;
             const selectedDateKey = selectedDate.toISOString().split('T')[0];
+            
+            // Format the date string
+            const formatDate = (dateStr: string) => {
+              const date = new Date(dateStr);
+              return date.toLocaleDateString('en-US', {
+                weekday: 'short',
+                month: 'short',
+                day: 'numeric'
+              });
+            };
+
+            // Compare dates by converting both to midnight local time
+            const isSelected = (() => {
+              const dayDate = new Date(day.date);
+              dayDate.setHours(0, 0, 0, 0);
+              const selectedDateLocal = new Date(selectedDate);
+              selectedDateLocal.setHours(0, 0, 0, 0);
+              return dayDate.getTime() === selectedDateLocal.getTime();
+            })();
             
             return (
               <button
                 key={dateKey}
-                onClick={() => setSelectedDate(date)}
+                onClick={() => setSelectedDate(new Date(dateKey))}
                 className={`
                   py-4 px-1 border-b-2 font-medium text-sm
                   ${
-                    dateKey === selectedDateKey
+                    isSelected
                       ? 'border-red-500 text-red-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                   }
                 `}
               >
-                {date.toLocaleDateString('en-US', {
-                  weekday: 'short',
-                  month: 'short',
-                  day: 'numeric',
-                })}
+                {formatDate(day.date)}
               </button>
             );
           })}
@@ -54,7 +90,7 @@ export default function ScheduleNavigation({ initialDate = new Date() }: Schedul
       </div>
 
       <div className="mt-4">
-        <ScheduleDay date={selectedDate} />
+        <ScheduleDay date={selectedDate} gameDay={selectedGameDay} standings={standings} />
       </div>
     </div>
   );

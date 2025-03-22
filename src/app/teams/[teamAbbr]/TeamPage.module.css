@@ -1,7 +1,6 @@
 .container {
     min-height: 100vh;
     background-color: #f8f9fa;
-    padding: 2rem;
 }
 
 .content {
@@ -9,7 +8,6 @@
     margin: 0 auto;
     background-color: white;
     border-radius: 8px;
-    padding: 2rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -25,4 +23,5 @@
     display: flex;
     justify-content: center;
     margin-bottom: 2rem;
+    padding:2rem;
 } 

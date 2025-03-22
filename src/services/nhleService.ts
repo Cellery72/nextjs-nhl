@@ -1,7 +1,7 @@
-import { Player } from '@/types/players';
+import { Player, PlayerLanding } from '@/types/players';
 import APIService from './apiService';
 import { NHLSchedule, ScheduleResponse } from '@/types/schedule';
-import { Standings } from '@/types/standings';
+import { NHLStandings } from '@/types/standings';
 
 interface RosterResponse {
   forwards: Player[];
@@ -24,12 +24,11 @@ export class NHLEService {
     return NHLEService.instance;
   }
 
-  // Schedule related endpoints
   async getScheduleNow(): Promise<NHLSchedule> {
     return await this.apiService.get<NHLSchedule>('/v1/schedule/now');
   }
 
-  async getScheduleByDate(date: string) {
+  async getScheduleByDate(date: string): Promise<NHLSchedule> {
     return await this.apiService.get(`/v1/schedule/${date}`);
   }
 
@@ -55,7 +54,7 @@ export class NHLEService {
   }
 
   // Standings related endpoints
-  async getStandingsNow(): Promise<Standings> {
+  async getStandingsNow(): Promise<NHLStandings> {
     return await this.apiService.get(`/v1/standings/now`);
   }
 
@@ -94,8 +93,8 @@ export class NHLEService {
     return await this.apiService.get(`/v1/player-spotlight`);
   }
 
-  async getPlayerLanding(playerId: number) {
-    return await this.apiService.get(`/v1/player/${playerId}/landing`);
+  async getPlayerLanding(playerId: number): Promise<PlayerLanding> {
+    return await this.apiService.get<PlayerLanding>(`/v1/player/${playerId}/landing`);
   }
 
   async getPlayerGameLog(playerId: number) {

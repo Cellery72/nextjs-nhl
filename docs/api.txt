@@ -1,0 +1,12 @@
+/api/teams/pit
+/api/teams/teamId
+{team info, roster, team stats, schedule}
+
+
+/api/teams/player-name-id i.e. /api/teams/sidney-crosby
+/api/players/playerId
+{player info, player stats, playing history}
+
+/api/schedule/
+/api/schedule/2025-13/16
+{schedule info based on date, previous weeks worth of games with results, next week work of games}

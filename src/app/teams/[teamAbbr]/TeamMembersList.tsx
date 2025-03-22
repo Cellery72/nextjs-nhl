@@ -3,6 +3,8 @@ import { Player } from '@/types/players';
 import { useState, useEffect } from 'react';
 import styles from './TeamMembersList.module.css';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface TeamMembersListProps {
     teamAbbr: string;
@@ -14,24 +16,33 @@ type SortDirection = 'asc' | 'desc';
 export default function TeamMembersList({ teamAbbr }: TeamMembersListProps) {
     const [teamMembers, setTeamMembers] = useState<Player[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
     const [searchTerm, setSearchTerm] = useState('');
     const [positionFilter, setPositionFilter] = useState('ALL');
     const [shootsFilter, setShootsFilter] = useState('ALL');
     const [sortField, setSortField] = useState<SortField>('name');
     const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
+    const router = useRouter();
 
     useEffect(() => {
         setIsLoading(true);
+        setError(null);
         const fetchTeamMembers = async () => {
-            try{
+            try {
                 const response = await fetch(`/api/players?teamAbbr=${teamAbbr}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch team members');
+                }
                 const data = await response.json();
+                if (!Array.isArray(data)) {
+                    throw new Error('Invalid response format');
+                }
                 setTeamMembers(data);
-            }
-            catch(error){
+            } catch (error) {
                 console.error('Error fetching team members:', error);
-            }
-            finally{
+                setError(error instanceof Error ? error.message : 'Failed to fetch team members');
+                setTeamMembers([]);
+            } finally {
                 setIsLoading(false);
             }
         };
@@ -39,8 +50,16 @@ export default function TeamMembersList({ teamAbbr }: TeamMembersListProps) {
         fetchTeamMembers();
     }, [teamAbbr]);
 
-    if (isLoading || !teamMembers) {
+    if (isLoading) {
         return <div className="text-center py-8">Loading...</div>;
+    }
+
+    if (error) {
+        return <div className="text-center py-8 text-red-600">Error: {error}</div>;
+    }
+
+    if (!teamMembers || teamMembers.length === 0) {
+        return <div className="text-center py-8">No players found</div>;
     }
 
     // Get unique positions for the filter dropdown
@@ -165,6 +184,15 @@ export default function TeamMembersList({ teamAbbr }: TeamMembersListProps) {
         return sortDirection === 'asc' ? '↑' : '↓';
     };
 
+    const handleRowClick = (player: Player) => {
+        const firstName = player.firstName.default.replace(" ", "-");
+        const lastName = player.lastName.default.replace(" ", "-");
+        const playerSlug = `${firstName}-${lastName}-${player.id}`.toLowerCase();
+        console.log(player);
+        console.log(playerSlug);
+        router.push(`/players/${playerSlug}`);
+    };
+
     return (
         <div className={styles.tableContainer}>
             <div className={styles.header}>
@@ -202,7 +230,7 @@ export default function TeamMembersList({ teamAbbr }: TeamMembersListProps) {
                 >
                     {shootsOptions.map(option => (
                         <option key={option} value={option}>
-                            {option === 'ALL' ? 'All Shoots/Catches' : `${option === 'L' ? 'Left' : 'Right'}`}
+                            {option === 'ALL' ? 'Shoots/Catches' : `${option === 'L' ? 'Left' : 'Right'}`}
                         </option>
                     ))}
                 </select>
@@ -242,7 +270,11 @@ export default function TeamMembersList({ teamAbbr }: TeamMembersListProps) {
                 </thead>
                 <tbody>
                     {sortedAndFilteredPlayers.map((player) => (
-                        <tr key={player.id}>
+                        <tr 
+                            key={player.id} 
+                            onClick={() => handleRowClick(player)}
+                            className={styles.clickableRow}
+                        >
                             <td className={styles.playerImage}>
                                 {player.headshot ? (
                                     <Image 
