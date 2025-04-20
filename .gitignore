@@ -44,5 +44,3 @@ next-env.d.ts
 public/teams/*
 prisma/schema.prisma
 .vercel
-
-public/contestants*.json

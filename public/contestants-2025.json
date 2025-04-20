@@ -1,0 +1,761 @@
+[
+    {
+      "contestantName": "Chris Philbin",
+      "bracket": [
+        {
+          "rank": 1,
+          "teamAbbrv": "NJD"
+        },
+        {
+          "rank": 2,
+          "teamAbbrv": "MIN"
+        },
+        {
+          "rank": 3,
+          "teamAbbrv": "OTT"
+        },
+        {
+          "rank": 4,
+          "teamAbbrv": "STL"
+        },
+        {
+          "rank": 5,
+          "teamAbbrv": "LAK"
+        },
+        {
+          "rank": 6,
+          "teamAbbrv": "DAL"
+        },
+        {
+          "rank": 7,
+          "teamAbbrv": "FLA"
+        },
+        {
+          "rank": 8,
+          "teamAbbrv": "WSH"
+        },
+        {
+          "rank": 9,
+          "teamAbbrv": "MTL"
+        },
+        {
+          "rank": 10,
+          "teamAbbrv": "WPG"
+        },
+        {
+          "rank": 11,
+          "teamAbbrv": "VGK"
+        },
+        {
+          "rank": 12,
+          "teamAbbrv": "TOR"
+        },
+        {
+          "rank": 13,
+          "teamAbbrv": "CAR"
+        },
+        {
+          "rank": 14,
+          "teamAbbrv": "COL"
+        },
+        {
+          "rank": 15,
+          "teamAbbrv": "TBL"
+        },
+        {
+          "rank": 16,
+          "teamAbbrv": "EDM"
+        }
+      ]
+    },
+    {
+      "contestantName": "Justin Ellery",
+      "bracket": [
+        {
+          "rank": 1,
+          "teamAbbrv": "MTL"
+        },
+        {
+          "rank": 2,
+          "teamAbbrv": "MIN"
+        },
+        {
+          "rank": 3,
+          "teamAbbrv": "STL"
+        },
+        {
+          "rank": 4,
+          "teamAbbrv": "OTT"
+        },
+        {
+          "rank": 5,
+          "teamAbbrv": "DAL"
+        },
+        {
+          "rank": 6,
+          "teamAbbrv": "CAR"
+        },
+        {
+          "rank": 7,
+          "teamAbbrv": "LAK"
+        },
+        {
+          "rank": 8,
+          "teamAbbrv": "NJD"
+        },
+        {
+          "rank": 9,
+          "teamAbbrv": "FLA"
+        },
+        {
+          "rank": 10,
+          "teamAbbrv": "TOR"
+        },
+        {
+          "rank": 11,
+          "teamAbbrv": "WPG"
+        },
+        {
+          "rank": 12,
+          "teamAbbrv": "EDM"
+        },
+        {
+          "rank": 13,
+          "teamAbbrv": "WSH"
+        },
+        {
+          "rank": 14,
+          "teamAbbrv": "VGK"
+        },
+        {
+          "rank": 15,
+          "teamAbbrv": "TBL"
+        },
+        {
+          "rank": 16,
+          "teamAbbrv": "COL"
+        }
+      ]
+    },
+    {
+      "contestantName": "Sammy Gagnon",
+      "bracket": [
+        {
+          "rank": 1,
+          "teamAbbrv": "NJD"
+        },
+        {
+          "rank": 2,
+          "teamAbbrv": "MIN"
+        },
+        {
+          "rank": 3,
+          "teamAbbrv": "STL"
+        },
+        {
+          "rank": 4,
+          "teamAbbrv": "MTL"
+        },
+        {
+          "rank": 5,
+          "teamAbbrv": "OTT"
+        },
+        {
+          "rank": 6,
+          "teamAbbrv": "TBL"
+        },
+        {
+          "rank": 7,
+          "teamAbbrv": "LAK"
+        },
+        {
+          "rank": 8,
+          "teamAbbrv": "DAL"
+        },
+        {
+          "rank": 9,
+          "teamAbbrv": "CAR"
+        },
+        {
+          "rank": 10,
+          "teamAbbrv": "COL"
+        },
+        {
+          "rank": 11,
+          "teamAbbrv": "WPG"
+        },
+        {
+          "rank": 12,
+          "teamAbbrv": "FLA"
+        },
+        {
+          "rank": 13,
+          "teamAbbrv": "WSH"
+        },
+        {
+          "rank": 14,
+          "teamAbbrv": "TOR"
+        },
+        {
+          "rank": 15,
+          "teamAbbrv": "VGK"
+        },
+        {
+          "rank": 16,
+          "teamAbbrv": "EDM"
+        }
+      ]
+    },
+    {
+      "contestantName": "Jessey Moreau",
+      "bracket": [
+        {
+          "rank": 1,
+          "teamAbbrv": "NJD"
+        },
+        {
+          "rank": 2,
+          "teamAbbrv": "STL"
+        },
+        {
+          "rank": 3,
+          "teamAbbrv": "MIN"
+        },
+        {
+          "rank": 4,
+          "teamAbbrv": "MTL"
+        },
+        {
+          "rank": 5,
+          "teamAbbrv": "NJD"
+        },
+        {
+          "rank": 6,
+          "teamAbbrv": "EDM"
+        },
+        {
+          "rank": 7,
+          "teamAbbrv": "COL"
+        },
+        {
+          "rank": 8,
+          "teamAbbrv": "TBL"
+        },
+        {
+          "rank": 9,
+          "teamAbbrv": "FLA"
+        },
+        {
+          "rank": 10,
+          "teamAbbrv": "CAR"
+        },
+        {
+          "rank": 11,
+          "teamAbbrv": "LAK"
+        },
+        {
+          "rank": 12,
+          "teamAbbrv": "TOR"
+        },
+        {
+          "rank": 13,
+          "teamAbbrv": "WSH"
+        },
+        {
+          "rank": 14,
+          "teamAbbrv": "VGK"
+        },
+        {
+          "rank": 15,
+          "teamAbbrv": "WPG"
+        },
+        {
+          "rank": 16,
+          "teamAbbrv": "OTT"
+        }
+      ]
+    },
+    {
+      "contestantName": "Steve Engstrom",
+      "bracket": [
+        {
+          "rank": 1,
+          "teamAbbrv": "NJD"
+        },
+        {
+          "rank": 2,
+          "teamAbbrv": "MIN"
+        },
+        {
+          "rank": 3,
+          "teamAbbrv": "STL"
+        },
+        {
+          "rank": 4,
+          "teamAbbrv": "MTL"
+        },
+        {
+          "rank": 5,
+          "teamAbbrv": "OTT"
+        },
+        {
+          "rank": 6,
+          "teamAbbrv": "LAK"
+        },
+        {
+          "rank": 7,
+          "teamAbbrv": "DAL"
+        },
+        {
+          "rank": 8,
+          "teamAbbrv": "FLA"
+        },
+        {
+          "rank": 9,
+          "teamAbbrv": "EDM"
+        },
+        {
+          "rank": 10,
+          "teamAbbrv": "WSH"
+        },
+        {
+          "rank": 11,
+          "teamAbbrv": "WPG"
+        },
+        {
+          "rank": 12,
+          "teamAbbrv": "TBL"
+        },
+        {
+          "rank": 13,
+          "teamAbbrv": "CAR"
+        },
+        {
+          "rank": 14,
+          "teamAbbrv": "VGK"
+        },
+        {
+          "rank": 15,
+          "teamAbbrv": "COL"
+        },
+        {
+          "rank": 16,
+          "teamAbbrv": "TOR"
+        }
+      ]
+    },
+    {
+      "contestantName": "Mat Fredericks",
+      "bracket": [
+        {
+          "rank": 1,
+          "teamAbbrv": "NJD"
+        },
+        {
+          "rank": 2,
+          "teamAbbrv": "MIN"
+        },
+        {
+          "rank": 3,
+          "teamAbbrv": "MTL"
+        },
+        {
+          "rank": 4,
+          "teamAbbrv": "OTT"
+        },
+        {
+          "rank": 5,
+          "teamAbbrv": "WPG"
+        },
+        {
+          "rank": 6,
+          "teamAbbrv": "LAK"
+        },
+        {
+          "rank": 7,
+          "teamAbbrv": "DAL"
+        },
+        {
+          "rank": 8,
+          "teamAbbrv": "STL"
+        },
+        {
+          "rank": 9,
+          "teamAbbrv": "EDM"
+        },
+        {
+          "rank": 10,
+          "teamAbbrv": "FLA"
+        },
+        {
+          "rank": 11,
+          "teamAbbrv": "WSH"
+        },
+        {
+          "rank": 12,
+          "teamAbbrv": "TBL"
+        },
+        {
+          "rank": 13,
+          "teamAbbrv": "CAR"
+        },
+        {
+          "rank": 14,
+          "teamAbbrv": "VGK"
+        },
+        {
+          "rank": 15,
+          "teamAbbrv": "COL"
+        },
+        {
+          "rank": 16,
+          "teamAbbrv": "TOR"
+        }
+      ]
+    },
+    {
+      "contestantName": "Kyle Chapman",
+      "bracket": [
+        {
+          "rank": 1,
+          "teamAbbrv": "MIN"
+        },
+        {
+          "rank": 2,
+          "teamAbbrv": "OTT"
+        },
+        {
+          "rank": 3,
+          "teamAbbrv": "STL"
+        },
+        {
+          "rank": 4,
+          "teamAbbrv": "NJD"
+        },
+        {
+          "rank": 5,
+          "teamAbbrv": "WSH"
+        },
+        {
+          "rank": 6,
+          "teamAbbrv": "LAK"
+        },
+        {
+          "rank": 7,
+          "teamAbbrv": "FLA"
+        },
+        {
+          "rank": 8,
+          "teamAbbrv": "DAL"
+        },
+        {
+          "rank": 9,
+          "teamAbbrv": "MTL"
+        },
+        {
+          "rank": 10,
+          "teamAbbrv": "WPG"
+        },
+        {
+          "rank": 11,
+          "teamAbbrv": "EDM"
+        },
+        {
+          "rank": 12,
+          "teamAbbrv": "TOR"
+        },
+        {
+          "rank": 13,
+          "teamAbbrv": "CAR"
+        },
+        {
+          "rank": 14,
+          "teamAbbrv": "VGK"
+        },
+        {
+          "rank": 15,
+          "teamAbbrv": "TBL"
+        },
+        {
+          "rank": 16,
+          "teamAbbrv": "COL"
+        }
+      ]
+    },
+    {
+      "contestantName": "Peter Russell",
+      "bracket": [
+        {
+          "rank": 1,
+          "teamAbbrv": "MIN"
+        },
+        {
+          "rank": 2,
+          "teamAbbrv": "NJD"
+        },
+        {
+          "rank": 3,
+          "teamAbbrv": "MTL"
+        },
+        {
+          "rank": 4,
+          "teamAbbrv": "DAL"
+        },
+        {
+          "rank": 5,
+          "teamAbbrv": "TBL"
+        },
+        {
+          "rank": 6,
+          "teamAbbrv": "WPG"
+        },
+        {
+          "rank": 7,
+          "teamAbbrv": "OTT"
+        },
+        {
+          "rank": 8,
+          "teamAbbrv": "EDM"
+        },
+        {
+          "rank": 9,
+          "teamAbbrv": "STL"
+        },
+        {
+          "rank": 10,
+          "teamAbbrv": "CAR"
+        },
+        {
+          "rank": 11,
+          "teamAbbrv": "LAK"
+        },
+        {
+          "rank": 12,
+          "teamAbbrv": "TOR"
+        },
+        {
+          "rank": 13,
+          "teamAbbrv": "WSH"
+        },
+        {
+          "rank": 14,
+          "teamAbbrv": "COL"
+        },
+        {
+          "rank": 15,
+          "teamAbbrv": "VGK"
+        },
+        {
+          "rank": 16,
+          "teamAbbrv": "FLA"
+        }
+      ]
+    },
+    {
+      "contestantName": "James Price",
+      "bracket": [
+        {
+          "rank": 1,
+          "teamAbbrv": "STL"
+        },
+        {
+          "rank": 2,
+          "teamAbbrv": "MTL"
+        },
+        {
+          "rank": 3,
+          "teamAbbrv": "NJD"
+        },
+        {
+          "rank": 4,
+          "teamAbbrv": "MIN"
+        },
+        {
+          "rank": 5,
+          "teamAbbrv": "OTT"
+        },
+        {
+          "rank": 6,
+          "teamAbbrv": "DAL"
+        },
+        {
+          "rank": 7,
+          "teamAbbrv": "TBL"
+        },
+        {
+          "rank": 8,
+          "teamAbbrv": "LAK"
+        },
+        {
+          "rank": 9,
+          "teamAbbrv": "EDM"
+        },
+        {
+          "rank": 10,
+          "teamAbbrv": "CAR"
+        },
+        {
+          "rank": 11,
+          "teamAbbrv": "WPG"
+        },
+        {
+          "rank": 12,
+          "teamAbbrv": "FLA"
+        },
+        {
+          "rank": 13,
+          "teamAbbrv": "TOR"
+        },
+        {
+          "rank": 14,
+          "teamAbbrv": "VGK"
+        },
+        {
+          "rank": 15,
+          "teamAbbrv": "WSH"
+        },
+        {
+          "rank": 16,
+          "teamAbbrv": "COL"
+        }
+      ]
+    },
+    {
+      "contestantName": "Trent McCrory",
+      "bracket": [
+        {
+          "rank": 1,
+          "teamAbbrv": "MTL"
+        },
+        {
+          "rank": 2,
+          "teamAbbrv": "MIN"
+        },
+        {
+          "rank": 3,
+          "teamAbbrv": "NJD"
+        },
+        {
+          "rank": 4,
+          "teamAbbrv": "STL"
+        },
+        {
+          "rank": 5,
+          "teamAbbrv": "OTT"
+        },
+        {
+          "rank": 6,
+          "teamAbbrv": "DAL"
+        },
+        {
+          "rank": 7,
+          "teamAbbrv": "LAK"
+        },
+        {
+          "rank": 8,
+          "teamAbbrv": "FLA"
+        },
+        {
+          "rank": 9,
+          "teamAbbrv": "TOR"
+        },
+        {
+          "rank": 10,
+          "teamAbbrv": "WPG"
+        },
+        {
+          "rank": 11,
+          "teamAbbrv": "WSH"
+        },
+        {
+          "rank": 12,
+          "teamAbbrv": "EDM"
+        },
+        {
+          "rank": 13,
+          "teamAbbrv": "CAR"
+        },
+        {
+          "rank": 14,
+          "teamAbbrv": "VGK"
+        },
+        {
+          "rank": 15,
+          "teamAbbrv": "TBL"
+        },
+        {
+          "rank": 16,
+          "teamAbbrv": "COL"
+        }
+      ]
+    },
+    {
+      "contestantName": "Taylor Dixon",
+      "bracket": [
+        {
+          "rank": 1,
+          "teamAbbrv": "STL"
+        },
+        {
+          "rank": 2,
+          "teamAbbrv": "NJD"
+        },
+        {
+          "rank": 3,
+          "teamAbbrv": "MIN"
+        },
+        {
+          "rank": 4,
+          "teamAbbrv": "MTL"
+        },
+        {
+          "rank": 5,
+          "teamAbbrv": "OTT"
+        },
+        {
+          "rank": 6,
+          "teamAbbrv": "DAL"
+        },
+        {
+          "rank": 7,
+          "teamAbbrv": "EDM"
+        },
+        {
+          "rank": 8,
+          "teamAbbrv": "FLA"
+        },
+        {
+          "rank": 9,
+          "teamAbbrv": "WSH"
+        },
+        {
+          "rank": 10,
+          "teamAbbrv": "LAK"
+        },
+        {
+          "rank": 11,
+          "teamAbbrv": "WPG"
+        },
+        {
+          "rank": 12,
+          "teamAbbrv": "TBL"
+        },
+        {
+          "rank": 13,
+          "teamAbbrv": "COL"
+        },
+        {
+          "rank": 14,
+          "teamAbbrv": "CAR"
+        },
+        {
+          "rank": 15,
+          "teamAbbrv": "VGK"
+        },
+        {
+          "rank": 16,
+          "teamAbbrv": "TOR"
+        }
+      ]
+    }
+  ]
