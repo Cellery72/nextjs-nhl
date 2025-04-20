@@ -1,0 +1,147 @@
+.tableContainer {
+    padding: 2rem;
+    overflow-x: auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.table th {
+    background-color: #f3f4f6;
+    color: #374151;
+    font-weight: 600;
+    padding: 12px;
+    text-align: left;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.table td {
+    padding: 12px;
+    color: #1f2937;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.table tr:hover {
+    background-color: #f9fafb;
+}
+
+.rankCell {
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.pointsCell {
+    font-weight: 600;
+    color: #1a1a1a;
+    text-align: right;
+}
+
+.clickableRow {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.clickableRow:hover {
+    background-color: #f3f4f6;
+}
+
+.expandedRow {
+    background-color: #f3f4f6;
+}
+
+.expandedContent {
+    background-color: #f8f9fa;
+}
+
+.bracketDetails {
+    padding: 1rem;
+}
+
+.bracketTitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 1rem;
+}
+
+.bracketGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.bracketEntry {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.teamLogo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.teamInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.teamRank {
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.teamAbbrv {
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+    .tableContainer {
+        padding: 1rem;
+    }
+    
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .title {
+        font-size: 1.25rem;
+    }
+    
+    .table th,
+    .table td {
+        padding: 8px;
+        font-size: 0.875rem;
+    }
+
+    .bracketGrid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+} 

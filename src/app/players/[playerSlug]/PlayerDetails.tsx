@@ -39,6 +39,9 @@ export default function PlayerDetails({ player }: PlayerDetailsProps) {
                     <h1 className={styles.playerName}>
                         {player.firstName.default} {player.lastName.default}
                     </h1>
+
+                    <span className={styles.separator}>|</span>
+
                     <Image 
                         src={player.teamLogo}
                         alt={`${player.teamCommonName.default} logo`}
@@ -46,9 +49,15 @@ export default function PlayerDetails({ player }: PlayerDetailsProps) {
                         height={80}
                         className={styles.teamLogo}
                     />
+
+                    <span className={styles.separator}>|</span>
+
                     <div className={styles.jerseyNumber}>
                         #{player.sweaterNumber || 'N/A'}
                     </div>
+
+                    <span className={styles.separator}>|</span>
+
                     <div className={styles.positionCode}>
                         {player.position}
                     </div>
@@ -78,65 +87,14 @@ export default function PlayerDetails({ player }: PlayerDetailsProps) {
                         />
                     </div>
 
-                    {/* Career Stats */}
-                    <div className={styles.careerStats}>
-                        <h2 className={styles.statsTitle}>Career Statistics</h2>
-                        <div className={styles.statsGrid}>
-                            <div className={styles.statCard}>
-                                <div className={styles.statLabel}>Games Played</div>
-                                <div className={styles.statValue}>{careerStats.gamesPlayed}</div>
-                            </div>
-                            <div className={styles.statCard}>
-                                <div className={styles.statLabel}>Goals</div>
-                                <div className={styles.statValue}>{careerStats.goals}</div>
-                            </div>
-                            <div className={styles.statCard}>
-                                <div className={styles.statLabel}>Assists</div>
-                                <div className={styles.statValue}>{careerStats.assists}</div>
-                            </div>
-                            <div className={styles.statCard}>
-                                <div className={styles.statLabel}>Points</div>
-                                <div className={styles.statValue}>{careerStats.points}</div>
-                            </div>
-                            <div className={styles.statCard}>
-                                <div className={styles.statLabel}>+/-</div>
-                                <div className={styles.statValue}>{careerStats.plusMinus}</div>
-                            </div>
-                            <div className={styles.statCard}>
-                                <div className={styles.statLabel}>PIM</div>
-                                <div className={styles.statValue}>{careerStats.pim}</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Current Season Stats */}
-                    <div className={styles.currentStats}>
-                        <h2 className={styles.statsTitle}>Current Season</h2>
-                        <div className={styles.statsGrid}>
-                            <div className={styles.statCard}>
-                                <div className={styles.statLabel}>Games Played</div>
-                                <div className={styles.statValue}>{currentSeasonStats.gamesPlayed}</div>
-                            </div>
-                            <div className={styles.statCard}>
-                                <div className={styles.statLabel}>Goals</div>
-                                <div className={styles.statValue}>{currentSeasonStats.goals}</div>
-                            </div>
-                            <div className={styles.statCard}>
-                                <div className={styles.statLabel}>Assists</div>
-                                <div className={styles.statValue}>{currentSeasonStats.assists}</div>
-                            </div>
-                            <div className={styles.statCard}>
-                                <div className={styles.statLabel}>Points</div>
-                                <div className={styles.statValue}>{currentSeasonStats.points}</div>
-                            </div>
-                            <div className={styles.statCard}>
-                                <div className={styles.statLabel}>+/-</div>
-                                <div className={styles.statValue}>{currentSeasonStats.plusMinus}</div>
-                            </div>
-                            <div className={styles.statCard}>
-                                <div className={styles.statLabel}>PIM</div>
-                                <div className={styles.statValue}>{currentSeasonStats.pim}</div>
-                            </div>
+                    <div className={styles.playerDetails}>
+                        <div className={styles.playerDetailsRow}>
+                            <div className={styles.playerDetailsValue}><span className={styles.playerDetailsLabel}>Height: </span>{formatHeight(player.heightInInches)}</div>
+                            <div className={styles.playerDetailsValue}><span className={styles.playerDetailsLabel}>Weight: </span>{player.weightInPounds} lbs</div>
+                            <div className={styles.playerDetailsValue}><span className={styles.playerDetailsLabel}>Born: </span>{player.birthCountry}</div>
+                            <div className={styles.playerDetailsValue}><span className={styles.playerDetailsLabel}>Birthplace: </span>{formatHeight(player.heightInInches)}</div>
+                            <div className={styles.playerDetailsValue}><span className={styles.playerDetailsLabel}>Catches: </span>{player.shootsCatches}</div>
+                            <div className={styles.playerDetailsValue}><span className={styles.playerDetailsLabel}>Draft: </span></div>
                         </div>
                     </div>
                 </div>

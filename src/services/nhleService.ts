@@ -2,6 +2,7 @@ import { Player, PlayerLanding } from '@/types/players';
 import APIService from './apiService';
 import { NHLSchedule, ScheduleResponse } from '@/types/schedule';
 import { NHLStandings } from '@/types/standings';
+import { Contestant } from '@/types/playoffBracket';
 
 interface RosterResponse {
   forwards: Player[];
@@ -63,11 +64,11 @@ export class NHLEService {
   }
 
   // Score related endpoints
-  async getScoresNow() : Promise<ScheduleResponse> {
+  async getScoresNow(): Promise<ScheduleResponse> {
     return await this.apiService.get<ScheduleResponse>(`/v1/score/now`);
   }
 
-  async getScoresByDate(date: string) : Promise<ScheduleResponse> {
+  async getScoresByDate(date: string): Promise<ScheduleResponse> {
     return await this.apiService.get<ScheduleResponse>(`/v1/score/${date}`);
   }
 
@@ -128,13 +129,35 @@ export class NHLEService {
   }
 
   // Playoff related endpoints
-  async getPlayoffBracket(year: number) {
+  async getPlayoffBracket(year: string) {
     return await this.apiService.get(`/v1/playoff-bracket/${year}`);
   }
 
   async getPlayoffSeries(season: number, seriesLetter: string) {
     return await this.apiService.get(`/v1/schedule/playoff-series/${season}/${seriesLetter}`);
   }
+
+  // Annual Custom Playoff Bracket
+  async getContestants(season: string) {
+    const year = parseInt(season);
+    if (isNaN(year) || year < 2025) {
+      return [];
+    }
+
+    try {
+      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+      const response = await fetch(`${baseUrl}/contestants-${season}.json`);
+      if (!response.ok) {
+        return [];
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error loading contestants:', error);
+      return [];
+    }
+  }
+
 }
 
 export const nhleService = NHLEService.getInstance();

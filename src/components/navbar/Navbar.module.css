@@ -9,8 +9,17 @@
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
+    position: relative;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    margin-left: 2rem;
 }
 
 .navList {
@@ -21,21 +30,115 @@
     margin: 0;
 }
 
-.navList li a {
+.navListRight {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    padding: 0;
+    margin: 0;
+}
+
+.navList li a,
+.navListRight li a {
     color: #a1a1aa;
     text-decoration: none;
     transition: color 0.2s ease;
     font-size: 0.95rem;
 }
 
-.navList li a:hover {
+.navList li a:hover,
+.navListRight li a:hover {
     color: #fff;
 }
 
+.homeLink {
+    display: flex;
+    align-items: center;
+    color: #a1a1aa;
+    transition: color 0.2s ease;
+    margin-right: auto;
+}
+
+.homeLink:hover {
+    color: #fff;
+}
+
+.homeIcon {
+    width: 24px;
+    height: 24px;
+}
+
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 10;
+}
+
+.hamburgerLine {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background-color: #a1a1aa;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
 /* Responsive design */
-@media (max-width: 640px) {
-    .navList {
-        gap: 1.5rem;
+@media (max-width: 768px) {
+    .nav {
+        margin-left: 0;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #18181b;
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        transform-origin: top;
+        border-bottom: 1px solid #27272a;
+    }
+
+    .navOpen {
+        max-height: 300px;
+        padding: 1rem 0;
+    }
+
+    .navList,
+    .navListRight {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .navListRight {
+        margin-top: 1rem;
+    }
+
+    .navList li,
+    .navListRight li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .navList li a,
+    .navListRight li a {
+        display: block;
+        padding: 0.5rem 0;
     }
 }
   

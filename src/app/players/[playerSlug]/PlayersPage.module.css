@@ -16,24 +16,28 @@
 .headerRow {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 0.5rem;
     padding: 1.5rem;
     background-color: #f8f9fa;
     border-radius: 8px;
     margin-bottom: 2rem;
 }
 
+.separator {
+    color: #ccc;
+    font-size: 2rem;
+    margin: 0 0.5rem;
+}
+
 .playerName {
     font-size: 2.5rem;
     color: #1a1a1a;
     margin: 0;
-    flex: 1;
 }
 
 .teamLogo {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
+    width: 60px;
+    height: 60px;
 }
 
 .jerseyNumber {
@@ -41,16 +45,14 @@
     font-weight: 700;
     color: #1a1a1a;
     padding: 0.5rem 1rem;
-    background-color: #e9ecef;
     border-radius: 4px;
 }
 
 .positionCode {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 600;
     color: #1a1a1a;
     padding: 0.5rem 1rem;
-    background-color: #e9ecef;
     border-radius: 4px;
 }
 
@@ -73,15 +75,15 @@
 /* Third Row Styles */
 .statsRow {
     display: grid;
-    grid-template-columns: 300px 1fr 1fr;
+    grid-template-columns: 300px 1fr;
     gap: 2rem;
     margin-top: 2rem;
 }
 
 .headshotContainer {
     position: relative;
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: 300px;
     border-radius: 50%;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.39);
@@ -94,6 +96,29 @@
     width: 100%;
     height: 100%;
     border-radius: 50%;
+}
+
+.playerDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.playerDetailsRow {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 0.25rem;
+}
+
+.playerDetailsValue {
+    font-size: 1rem;
+    color: #1a1a1a;
+}
+
+.playerDetailsLabel {
+    font-weight: 700;
+    color: #1a1a1a;
 }
 
 .careerStats {
@@ -146,8 +171,9 @@
     }
     
     .headshotContainer {
-        width: 100%;
-        height: 250px;
+        width: 140px;
+        height: 140px;
+        margin: 0 auto;
     }
 }
 
@@ -157,12 +183,36 @@
     }
 
     .headerRow {
-        flex-wrap: wrap;
-        gap: 1rem;
+        flex-wrap: nowrap;
+        gap: 0.25rem;
+        padding: 1rem;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     .playerName {
-        font-size: 2rem;
+        font-size: 1.5rem;
+        white-space: nowrap;
+    }
+
+    .teamLogo {
+        width: 40px;
+        height: 40px;
+    }
+
+    .jerseyNumber {
+        font-size: 1.25rem;
+        padding: 0.25rem 0.5rem;
+    }
+
+    .positionCode {
+        font-size: 1.25rem;
+        padding: 0.25rem 0.5rem;
+    }
+
+    .separator {
+        font-size: 1.5rem;
+        margin: 0 0.25rem;
     }
 
     .actionImageRow {
