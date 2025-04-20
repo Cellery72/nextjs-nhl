@@ -9,7 +9,7 @@ export default async function BracketPage() {
   const host = headersList.get('host');
   const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
   const baseUrl = `${protocol}://${host}`;
-  const bracketName = 'Yoffs Playoff Pool 2025';
+  const bracketName = '2025 Yoffs Pool';
 
   try {
     const response = await fetch(`${baseUrl}/api/bracket?year=2025`, {
