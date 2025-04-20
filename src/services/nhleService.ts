@@ -141,16 +141,22 @@ export class NHLEService {
   async getContestants(season: string) {
     const year = parseInt(season);
     if (isNaN(year) || year < 2025) {
+      console.log('Invalid year for contestants:', year);
       return [];
     }
 
     try {
       const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-      const response = await fetch(`${baseUrl}/contestants-${season}.json`);
+      const url = `${baseUrl}/contestants-${season}.json`;
+      console.log('Fetching contestants from:', url);
+      
+      const response = await fetch(url);
       if (!response.ok) {
+        console.error('Failed to fetch contestants:', response.status, response.statusText);
         return [];
       }
       const data = await response.json();
+      console.log('Successfully loaded contestants data');
       return data;
     } catch (error) {
       console.error('Error loading contestants:', error);

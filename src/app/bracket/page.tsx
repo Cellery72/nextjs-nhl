@@ -17,10 +17,16 @@ export default async function BracketPage() {
     });
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch schedule data: ${response.statusText}`);
+      const errorData = await response.json();
+      throw new Error(errorData.details || `Failed to fetch schedule data: ${response.statusText}`);
     }
 
     const data = await response.json();
+    
+    if (!data.bracket || !data.contestants) {
+      throw new Error('Invalid data structure received from API');
+    }
+
     const playoffBracket: NHLPlayoffBracket = data.bracket;
     const contestants: Contestant[] = data.contestants;    
     const teamWins = calculateTeamWins(playoffBracket);
@@ -69,7 +75,9 @@ export default async function BracketPage() {
         <div className="container mx-auto px-4 py-8">
           <div className="text-center">
             <h1 className="text-2xl font-bold text-red-600 mb-4">Error Loading {bracketName}</h1>
-            <p className="text-gray-600">We're having trouble loading the Playoff Bracket. Please try again later.</p>
+            <p className="text-gray-600 mb-2">We're having trouble loading the Playoff Bracket.</p>
+            <p className="text-gray-500 text-sm">Error details: {error instanceof Error ? error.message : 'Unknown error'}</p>
+            <p className="text-gray-500 text-sm mt-4">Please try again later or contact support if the issue persists.</p>
           </div>
         </div>
       </main>
