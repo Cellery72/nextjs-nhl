@@ -13,7 +13,9 @@ interface RosterResponse {
 export class NHLEService {
   private static instance: NHLEService;
   private apiService: APIService;
+  private localURL: string = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'; 
 
+  
   private constructor() {
     this.apiService = new APIService('https://api-web.nhle.com');
   }
@@ -146,9 +148,7 @@ export class NHLEService {
     }
 
     try {
-      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-      const url = `${baseUrl}/contestants-${season}.json`;
-      console.log('Fetching contestants from:', url);
+      const url = `${this.localURL}/contestants-${season}.json`;
       
       const response = await fetch(url);
       if (!response.ok) {
@@ -156,7 +156,6 @@ export class NHLEService {
         return [];
       }
       const data = await response.json();
-      console.log('Successfully loaded contestants data');
       return data;
     } catch (error) {
       console.error('Error loading contestants:', error);

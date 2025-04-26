@@ -9,9 +9,10 @@ export default async function SchedulePage() {
   const host = headersList.get('host');
   const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
   const baseUrl = `${protocol}://${host}`;
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
   try {
-    const response = await fetch(`${baseUrl}/api/schedule?date=${date.toISOString().split('T')[0]}`, {
+    const response = await fetch(`${baseUrl}/api/schedule?date=${date.toISOString()}&tz=${encodeURIComponent(timeZone)}`, {
       next: { revalidate: 300 }, // Cache for 5 minutes
     });
     

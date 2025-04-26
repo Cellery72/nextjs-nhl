@@ -1,17 +1,25 @@
 import { NextResponse } from 'next/server';
 import { NHLEService } from '@/services/nhleService';
+import {format, toZonedTime} from 'date-fns-tz';
 
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const date = searchParams.get('date');
-    
+    const dateParam = searchParams.get('date'); // e.g. "2025-04-26"
+    const timeZone = searchParams.get('tz') || 'UTC'; // default to UTC if not sent
+
+    if (!dateParam){
+      return new Response('Missing date', {status: 400});
+    }
+
+    const date = new Date(dateParam);
+    const zonedDate = toZonedTime(date, timeZone);
+    const formattedDate = format(zonedDate, 'yyyy-MM-dd', {timeZone});
+
     const nhleService = NHLEService.getInstance();
           
     const standings = await nhleService.getStandingsNow();
-    const scoreSchedule = date
-      ? await nhleService.getScoreScheduleByDate(date)
-      : await nhleService.getScoreScheduleNow();
+    const scoreSchedule = await nhleService.getScoreScheduleByDate(formattedDate);
     
     return NextResponse.json({ 
       scoreSchedule, 
